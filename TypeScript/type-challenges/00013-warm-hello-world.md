@@ -10,6 +10,10 @@ type test = Expect<Equal<HelloWorld, string>>
 ```
 
 ---
+### Answer
 ```ts
 type HelloWorld = string
 ```
+
+#### Documents
+[The primitives: string, number, and boolean](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean)
