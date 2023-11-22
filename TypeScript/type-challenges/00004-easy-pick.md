@@ -3,13 +3,20 @@
 ### Question
 Implement the built-in `Pick<T, K>` generic without using it.  
 Constructs a type by picking the set of properties `K` from `T`
+
 ```ts
-// expected to be string
-type MyPick<T, K extends T> = any
-```
-```ts
-// you should make this work
-type test = Expect<Equal<HelloWorld, string>>
+interface Todo {
+  title: string
+  description: string
+  completed: boolean
+}
+
+type TodoPreview = MyPick<Todo, 'title' | 'completed'>
+
+const todo: TodoPreview = {
+    title: 'Clean room',
+    completed: false,
+}
 ```
 
 ---
