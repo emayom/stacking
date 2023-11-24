@@ -1,4 +1,4 @@
-# TIL 🔨
+# Til-Log 🔨
 🧗‍♀️ Today I Learned ✨
 
 > 컨텐츠에 따라 `TIL`이 아닌 `WIL(Weakly I Learned)`, `MIL(Montly I Learned)`이 될지도 모르겠습니다.  
