@@ -7,10 +7,10 @@
 ### Documents
 |:file_folder:|설명|  
 |---|----|
-|`Algorithms`|알고리즘|
-|`Books`| |
-|`OOP`|객체 지향 프로그래밍|
-|`Git`|Git|
+|[`Algorithms`](./Algorithms/)|알고리즘|
+|[`Books`](./Books/)| |
+|[`OOP`](./OOP/)|객체 지향 프로그래밍|
+|[`Git`](./Git/)|Git|
 |`JavaScript`|자바스크립트|
-|`TypeScript`|타입스크립트|
+|[`TypeScript`](./TypeScript/)|타입스크립트|
 |`CSS`|CSS|
