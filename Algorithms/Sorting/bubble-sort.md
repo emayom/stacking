@@ -17,10 +17,15 @@
 <br>
 
 ## 구현 
-- 특정 항목과 나머지 항목들을 비교하는 것을 반복하기 위해 이중 `for`문으로 구현한다.  
+#### 의사코드(pseudo code)
+- 배열의 첫번째 요소부터 선택하여 정렬을 시작한다.
+- 정렬되지 않은 배열의 인덱스마다 우측과 값을 비교, 교환하는 과정이 필요하여 이중 `for`문으로 구현한다.
 - 반복함에 따라 정렬해야 하는 항목의 수는 감소하는 것을 구현하기 위해 
-    - 외부 반복문(Outer)은 감소하도록
-    - 내부 반복문(Inner)은 감소한 값의 -1보다 작을 때까지 반복하는 조건으로 설정한다.
+    - 외부 반복문(Outer) 초기식 제어 변수 i의 값은 배열의 길이로 시작하여 점차 감소한다. 
+    - 내부 반복문(Inner) 초기식 제어 변수 j의 값은 0부터 시작하여 i - 1보다 작을 때까지 증가한다. 
+- 정렬할 요소와 우측 항목(`j + 1`)을 비교, 더 크면 교환하는 과정을 반복한다.  
+
+<br>
 
 ```js
 const array = [25, 4, 49, 22, 27, 32, 14, 7, 12, 40];
@@ -33,7 +38,7 @@ const bubbleSort = (array) => {
   for (let i = array.length; i > 0; i--) {
     for (let j = 0; j < i - 1; j++) {
       if (array[j] > array[j + 1]) 
-        [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
+        swap(array, j, j + 1);
     }
   }
 };
@@ -92,7 +97,7 @@ const bubbleSort = (array) => {
 
 ## 시간 복잡도(Time Complexity)
 
-버블 정렬의 시간 복잡도는 `Worst`, `Average`의 경우 O($n^2$), `Best`의 경우 O($n$)이다.  
+버블 정렬의 시간 복잡도는 `Best`의 경우 O($n$)이고, `Worst`, `Average`의 경우 O($n^2$)이다.  
 개선된 버블 정렬(Optimized Bubble Sort)의 시간 복잡도는 `Best`의 경우 O($n$)이다. 
 
 ## 공간 복잡도(Space Complexity)
