@@ -66,7 +66,9 @@ ECMAScript 명세에서는 `Array.prototype.sort()` 매서드에 대해 특정�
 ---
 <br>
 
-### Reference 
+### References
 [15 Sorting Algorithms in 6 Minutes](https://www.youtube.com/watch?v=kPRA0W1kECg)  
-[Sorting Algorithms Animations](https://www.toptal.com/developers/sorting-algorithms)
-[VisuAlgo - Sorting](https://visualgo.net/en/sorting)
+[Sorting Algorithms Animations](https://www.toptal.com/developers/sorting-algorithms)  
+[VisuAlgo - Sorting](https://visualgo.net/en/sorting)  
+
+[Udemy - JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/best-javascript-data-structures/)
