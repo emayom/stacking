@@ -9,7 +9,7 @@
 1. [선택 정렬(Selection Sort)](./selection-sort.md)
 1. [삽입 정렬(Insertion Sort)](./insertion-sort.md)
     ![Static Badge](https://img.shields.io/badge/stable%20sort-E9ECEF?style=flat-square)
-1. 퀵 정렬(Quick Sort)
+1. [퀵 정렬(Quick Sort)](./quick-sort.md)
 1. [합병 정렬(Merge Sort)](./merge-sort.md)
     ![Static Badge](https://img.shields.io/badge/stable%20sort-E9ECEF?style=flat-square)
 1. 힙 정렬(Heap Sort)
@@ -31,8 +31,8 @@
 | `Algorithm` | :thumbsup: `Best` | `Avg` | :thumbsdown: `Worst` | `Space Complexity` | `stable`| `in-place` |
 | :--- | :----: | :----: | :----: | :----: | :----: | :----: |
 | 선택 정렬(Selection Sort)   | O($n^2$) | O($n^2$) | O($n^2$) | O(1) | | :white_check_mark: |
-| 삽입 정렬(Insertion Sort) | ||||||
-| 퀵 정렬(Quick Sort) | ||||||
+| 삽입 정렬(Insertion Sort) | O($n$) | O($n^2$) | O($n^2$) | O(1) | :white_check_mark: | :white_check_mark: |
+| 퀵 정렬(Quick Sort) | O($n\\,log\\,n$) | O($n\\,log\\,n$) | O($n\\,log\\,n$) | O($log\\,n$) | | :white_check_mark: |
 | 합병 정렬(Merge Sort) | O($n\\,log\\,n$) | O($n\\,log\\,n$) | O($n\\,log\\,n$) | O($n$) | :white_check_mark: | |
 | 힙 정렬(Heap Sort) | ||||||
 | 기수 정렬(Redix Sort (LSD))  | ||||||
