@@ -32,9 +32,9 @@
 | :--- | :----: | :----: | :----: | :----: | :----: | :----: |
 | 선택 정렬(Selection Sort)   | O($n^2$) | O($n^2$) | O($n^2$) | O(1) | | :white_check_mark: |
 | 삽입 정렬(Insertion Sort) | O($n$) | O($n^2$) | O($n^2$) | O(1) | :white_check_mark: | :white_check_mark: |
-| 퀵 정렬(Quick Sort) | O($n\\,log\\,n$) | O($n\\,log\\,n$) | O($n\\,log\\,n$) | O($log\\,n$) | | :white_check_mark: |
+| 퀵 정렬(Quick Sort) | O($n\\,log\\,n$) | O($n\\,log\\,n$) | O($n^2$) | O($log\\,n$) | | :white_check_mark: |
 | 합병 정렬(Merge Sort) | O($n\\,log\\,n$) | O($n\\,log\\,n$) | O($n\\,log\\,n$) | O($n$) | :white_check_mark: | |
-| 힙 정렬(Heap Sort) | ||||||
+| 힙 정렬(Heap Sort) | O($n\\,log\\,n$) | O($n\\,log\\,n$) | O($n\\,log\\,n$) | O(1) | | :white_check_mark: |
 | 기수 정렬(Redix Sort (LSD))  | ||||||
 | 기수 정렬(Redix Sort (MSD))  | ||||||
 | std::sort (gcc) | ||||||
