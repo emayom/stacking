@@ -2,7 +2,7 @@
 
 | `Algorithm` | :thumbsup: `Best` | `Avg` | :thumbsdown: `Worst` | `Space Complexity` | `stable`| `in-place` |
 | :---      |   :----:  |   :----:   |   :----:   |   :----:   |   :----:   |   :----:   |
-| 합병 정렬(Merge Sort) | O($n\:log\:n$) | O($n\:log\:n$) | O($n\:log\:n$) | O($n$) | :white_check_mark: | |
+| 합병 정렬(Merge Sort) | O($n\\,log\\,n$) | O($n\\,log\\,n$) | O($n\\,log\\,n$) | O($n$) | :white_check_mark: | |
 
 ## 동작 원리 
 > 이전에 구현한 버블 정렬, 삽입 정렬, 선택 정렬은 <u>2차 시간 복잡도</u>를 가지는 알고리즘으로 대용량의 정렬을 수행하기에는 적절하지 않다. 
@@ -142,14 +142,14 @@ const mergeSort = (array) => {
 
 ## 시간 복잡도(Time Complexity)
 
-합병 정렬의 시간 복잡도는 `Best`, `Average`, `Worst` 모든 경우에서 O($n\:log\:n$)이다.  
+합병 정렬의 시간 복잡도는 `Best`, `Average`, `Worst` 모든 경우에서 O($n\\,log\\,n$)이다.  
 
 ## 공간 복잡도(Space Complexity)
-공간복잡도는 O(n)으로 주어진 배열의 크기가 클수록 메모리에 더 많은 공간을 사용한다. 
+공간복잡도는 O($n$)으로 주어진 배열의 크기가 클수록 메모리에 더 많은 공간을 사용한다. 
 
 <br>
 
 ## 결론 
 합병 정렬은 이전에 구현한 2차 시간 복잡도를 가지는 정렬 알고리즘에 비해 추가적인 메모리 공간이 필요하지만,  
-`Worst`의 경우에도 O($n\:log\:n$)의 시간 복잡도를 나타내는 일관된 성능을 보장한다.  
+`Worst`의 경우에도 O($n\\,log\\,n$)의 시간 복잡도를 나타내는 일관된 성능을 보장한다.  
 또한 데이터 크기가 커질수록 2차 시간 복잡도를 가지는 정렬 알고리즘보다 더욱 효율적이다.  
