@@ -1,4 +1,4 @@
-# 매서드 체이닝(Method Chaining)
+# 매서드 체이닝(Method Chaining)의 득과실
 ##### Table of Contents
 - [매서드 체이닝(Method Chaining)이란?](#🔗-매서드-체이닝method-chaining이란)  
 - [체이닝(Chaining)의 이점](#👍-체이닝chaining의-이점)  
