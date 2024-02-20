@@ -1,4 +1,4 @@
-# 무엇이 탁월한 개발자를 만드는가
+# 무엇이 탁월한 개발자를 만드는가: 자가 점검해 보기
 
 <2023 인프콘> [주니어 프론트엔드 엔지니어의 성과 및 역량 향상을 위한 실전 가이드 1부]((https://www.inflearn.com/course/%EC%9D%B8%ED%94%84%EC%BD%982023-%EB%8B%A4%EC%8B%9C%EB%B3%B4%EA%B8%B0)), [무엇이 탁월한 개발자를 만드는가](https://maily.so/boost.life.density/posts/a4aaf218)를 기록하며 개인적인 생각을 담아 정리한 글입니다. 
 
