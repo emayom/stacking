@@ -1,4 +1,4 @@
-# 의존관계 역전 원칙(Dependency Inversion Principle, DIP)
+# 의존관계 역전 원칙(Dependency Inversion Principle, DIP)과 추상화
 ##### Table of Contents
 - [의존관계 역전 원칙](#의존관계-역전-원칙)  
 - [예제 코드](#예제-코드)
