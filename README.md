@@ -16,5 +16,8 @@
 - [매서드 체이닝(Method Chaining)의 득과실](https://github.com/emayom/TILs/blob/main/OOP/method-chaining.md)
 - [의존관계 역전 원칙(Dependency Inversion Principle, DIP)과 추상화](https://github.com/emayom/TILs/blob/main/OOP/SOLID/dependency-inversion-principle.md)
 
+## Books 
+- [실용주의 프로그래머 수록 팁 모음](https://github.com/emayom/TILs/blob/main/books/the-pragmatic-programmer-tips.md)
+
 ## etc.
 - [무엇이 탁월한 개발자를 만드는가: 자가 점검해 보기](https://github.com/emayom/TILs/blob/main/etc./what-makes-a-great-software-enginner.md)
