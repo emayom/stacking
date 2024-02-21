@@ -5,6 +5,9 @@
 - 모든 문서는 [GFM](https://docs.github.com/ko/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)(GitHub Flavored Markdown)을 사용한다.
 - 더 많은 공유를 원한다면 [기술 블로그]()에 포스팅한다. 
 
+## JavaScript
+- [Throttle, Debounce로 웹 성능 최적화하기](https://github.com/emayom/TILs/blob/main/javascript/optimizing-web-performance-with-throttle-and-debounce.md)
+
 ## React 
 - [Vite + TypeScript 환경에서 SVGR 사용하기: SVG-in-JS
 ](https://github.com/emayom/TILs/blob/main/react/import-svg-with-vite.md)
