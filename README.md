@@ -9,6 +9,7 @@
 - [Throttle, Debounce로 웹 성능 최적화하기](https://github.com/emayom/TILs/blob/main/javascript/optimizing-web-performance-with-throttle-and-debounce.md)
 
 ## React 
+- [왜 리액트는 단방향 데이터 흐름을 채택했을까?](ttps://github.com/emayom/TILs/blob/main/react/data-flow-in-react.md)
 - [Vite + TypeScript 환경에서 SVGR 사용하기: SVG-in-JS
 ](https://github.com/emayom/TILs/blob/main/react/import-svg-with-vite.md)
 
