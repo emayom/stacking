@@ -21,21 +21,47 @@
 
 그렇다면 Context API를 뭐라고 설명하는 것이 좋을까요?   
 아무래도 아직까지는 <u>**Prop Drilling을 피하기 위한 의존성 주입 도구**</u> 정도가 적절하지 않을까 싶습니다.  
-실제로 [리액트 공식 문서](https://react.dev/learn/passing-data-deeply-with-context)에서는 Context를 상태 끌어올리기(Lifting state up)로 발생가능한 Prop Drilling을 회피하며, **"props를 전달하기 위한 대안"** 정도로 설명하고 있습니다. Context는 아무것도 관리하지 않습니다. 전달받고, 전달할 뿐이죠. 
+실제로 [리액트 공식 문서](https://react.dev/learn/passing-data-deeply-with-context)에서는 Context API를 상태 끌어올리기(Lifting state up)로 발생 가능한 Prop Drilling을 회피하며,  컴포넌트 트리의 깊은 곳에 있는 컴포넌트들에게 "props를 전달하기 위한 대안" 정도로 설명하고 있습니다. context는 아무것도 관리하지 않습니다. 전달받고, 전달할 뿐이죠. 
 
-그렇다면 Context API를 어떻게 정의할 수 있을까?
+결론적으로 Context API는 상태 관리 도구는 아닙니다. 하지만, useState, useReducer hook과 함께 사용한다면 Redux와 유사한 방식으로 전역 상태를 관리하고, 관심사를 분리하는 것에 사용할 수 있습니다. 만약 단순 전역 상태 관리를 위한다면 충분히 목적을 달성할 수 있습니다.  
 
-[리액트 공식 문서](https://react.dev/learn/passing-data-deeply-with-context)에서는 Context API를 **"props를 전달하기 위한 대안"** 정도로 설명하고 
+### Context를 사용하기 전에,
+Context를 상태 관리를 위한 용도로 사용하기 전에 고려해야 하는 몇 가지 사항이 있습니다.  
 
-결론적으로 **의존성 주입**을 위해 
+1. **자주 변경되는 값을 관리하기에 적합하지 않습니다.**  
+Context API는 Redux가 아닙니다. <u>Context API는 Provider의 value가 바뀔 때마다 context를 구독하는 하위의 모든 컴포넌트들은 다시 렌더링 되도록 동작합니다.</u> 때문에 context의 값이 자주 변경되는 경우에는 성능 저하가 발생할 수 있으므로, useMemo나 useCallback을 활용하여 별도로 성능을 최적화하는 것이 필요할 수 있습니다. 또한, 하나의 context에 연관성이 없는 value을 함께 저장한다면 적절하게 Context Provider를 분리하여 관리해야 합니다. 
 
-<br/>
+2. **깊이 중첩된 Context는 코드의 가독성과 유지보수성이 저하될 수 있습니다.**
+    ```jsx
+    <ThemeContext.Provider>
+        <UserContext.Provider>
+        <SomeOtherContext.Provider>
+            <YetAnotherContext.Provider>
+            <OneMoreContext.Provider>
+                <AndOneMoreContext.Provider>
+                <AndSoOnContext.Provider>
+                    <AndSoForthContext.Provider>
+                    <App/>
+                    </AndSoForthContext.Provider>
+                </AndSoOnContext.Provider>
+                </AndOneMoreContext.Provider>
+            </OneMoreContext.Provider>
+            </YetAnotherContext.Provider>
+        </SomeOtherContext.Provider>
+        </UserContext.Provider>
+    </ThemeContext.Provider>
+    ```
+    무분별하게 Context를 추가하다 보면, 깊이 중첩된 Context로 인해 Provider Hell(Context Hell)이 만들어질 수 있습니다.  
+    이는 코드의 가독성과 유지 보수성을 저하시킬 수 있으므로 주의해야 합니다.
 
-## 합성(Composition): Prop Drilling를 피하기 위한 다른 대안
-Prop Drilling를 피하기 위한 다른 대안으로는 [컴포넌트 합성](https://legacy.reactjs.org/docs/context.html#before-you-use-context)이 있다. 
+3. **컴포넌트의 재사용이 어려워집니다.** 
+
+단순 전역 상태 관리 이상 고수준의 상태 관리가 목적이라면 여타 라이브러리를 사용하는 것이 더 적합할 수 있습니다. 
 
 <br/>
 
 > #### References
 > - [Why React Context is Not a "State Management" Tool (and Why It Doesn't Replace Redux)](https://blog.isquaredsoftware.com/2021/01/context-redux-differences/#:~:text=Therefore%2C%20Context%20is%20not%20a,based%20on%20React%20component%20state.)  
-> 
+> - [uberVU - props vs state](https://github.com/uberVU/react-guide/blob/master/props-vs-state.md#state)
+> - [리액트 상태 관리 가이드](https://www.stevy.dev/react-state-management-guide/)
+> - [프론트엔드 상태관리 실전 편 with React Query & Zustand](https://www.youtube.com/watch?v=nkXIpGjVxWU)
