@@ -19,7 +19,9 @@
 
 "상태 관리"라는 개념을 공부하다 보면 비교적 러닝 커브가 낮고, 추가적인 라이브러리 없이 사용할 수 있는 Context API를 useState, useReducer와 함께 사용하며  _"입문용 상태 관리 도구"_  정도로 설명하는 글들을 쉽게 찾아볼 수 있습니다. 그러나 머지않아 'Context API를 과연 상태 관리 도구로 설명하는 것이 옳은 것인가?'에 대한 의문이 생기기 시작할 것입니다. **사실상 상태의 "관리"는 useState, useReducer hook이 수행하고 있으니 말이죠.**  
 
-그렇게 Context API를 상태 관리 도구로 인식하며 시작했지만, 머지않아 Context API를 과연 상태 관리 도구로 설명하는 것이 옳은 것인가?에 대한 의문이 생겼습니다. **사실상 상태를 "관리"해주는 건 useState, useReducer인데 말이죠.**  
+그렇다면 Context API를 뭐라고 설명하는 것이 좋을까요?   
+아무래도 아직까지는 <u>**Prop Drilling을 피하기 위한 의존성 주입 도구**</u> 정도가 적절하지 않을까 싶습니다.  
+실제로 [리액트 공식 문서](https://react.dev/learn/passing-data-deeply-with-context)에서는 Context를 상태 끌어올리기(Lifting state up)로 발생가능한 Prop Drilling을 회피하며, **"props를 전달하기 위한 대안"** 정도로 설명하고 있습니다. Context는 아무것도 관리하지 않습니다. 전달받고, 전달할 뿐이죠. 
 
 그렇다면 Context API를 어떻게 정의할 수 있을까?
 
