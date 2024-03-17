@@ -10,6 +10,7 @@
 
 ## React 
 - [왜 리액트는 단방향 데이터 흐름을 채택했을까?](https://github.com/emayom/TILs/blob/main/react/data-flow-in-react.md)    
+- [Context API는 "상태 관리" 도구인가?](https://github.com/emayom/TILs/blob/main/react/context-api-isnt-a-state-management-tool.md)
 - [Vite + TypeScript 환경에서 SVGR 사용하기: SVG-in-JS](https://github.com/emayom/TILs/blob/main/react/import-svg-with-vite.md)
 
 ## OOP
