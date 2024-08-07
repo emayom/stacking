@@ -173,24 +173,84 @@
     - 수익 증대(Grow revenue)
     - 운영 효율성 향상(Increased operational efficiency)
 
-- **마이그레이션 전략(7R)**  
+- **클라우드 마이그레이션 전략(7R)**  
     - **Retire**
-        - 사용 중지하거나 보관하려는 애플리케이션
+        - 사용 중지하거나 보관하려는 애플리케이션 제거 
     - **Retain**
-        - 소스 환경에 보관하려는 애플리케이션 또는 마이그레이션할 준비가 되지 않은 애플리케이션
+        - 소스 환경에 보관하려는 애플리케이션 또는 마이그레이션할 준비가 되지 않은 애플리케이션  
+         → 보안, 데이터 규정 준수, 성능, 해결되지 않은 종속성, 마이그레이션할 비즈니스 가치가 없거나, 복잡한 경우 
     - **Rehost**
-        - lift and shift
+        - _lift and shift_
         - 변경 사항 없이 소스 환경에서 AWS 클라우드로 이동 
+        - <u>어떤 종류의 최적화도 수행하지 않음</u> 
+            - 최소한의 리스크
+            - 많은 비용이 들지않고 신속한 마이그레이션
+            - 제한된 클라우드 네이티브 기능 
     - **Relocate**
+        - 온프로미스에서 클라우드로, EC2 인스턴스를 다른 VPC, AWS 계정 혹은 리전으로 이동 
     - **Repurchase**
-        - drop and shop
-        - 애플리케이션을 다른 버전이나 제품으로 교체
+        - _drop and shop_
+        - 클라우드로 마이그레이션하는 동안 애플리케이션을 다른 버전이나 제품으로 <u>교체</u>  
+         → 비교적 비용이 많이 들지만, 클라우드 네이티브 기능의 이점을 빠르게 도입 가능  
     - **Replatform**
-        - lift, tinker, and shift or lift and reshape
-        - 애플리케이션을 클라우드로 이전하고 일정 수준의 최적화 
-
+        - _lift and reshape_
+        - 클라우드로 마이그레이션하는 동안 핵심 아키텍처는 유지하면서 일정 수준의 클라우드 최적화 
     - **Refactor / Re-architect**
         - <u>대규모 마이그레이션에 적절하지 않음</u>
-        - 확장, 제품 및 기능 출시 가속화, 비용 절감의 비즈니스 요구가 강할 경우 
+        - 클라우드 네이티브 기능의 이점을 활용한 애플리케이션 설계 재구상 
+        - 확장성, 성능, 보안, 제품 및 기능 출시 가속화, 비용 절감의 비즈니스 요구가 강할 경우 
 
 #### 1.4 클라우드 경제성의 개념 이해
+- **Right Sizing**  
+    - 워크로드 성능 및 용량 요구 사항에 맞춰 인스턴스 유형과 크기를 적절하게 조정하여 클라우드 비용 최적화
+
+        - 클라우드는 탄력적이며, 스케일 업이 쉬움 → <u>작은 크기로 시작 올바른 크기로 스케일 업</u>
+        - 클라우드 마이그레이션 이전, 이후 주기적인 모니터링을 통해 조정 
+        - CloudWatch, AWS Cost Explorer, AWS Trusted Advisor, 3rd party tools
+
+- **AWS 관리형 서비스(AWS Managed Services)**  
+    직접 인프라를 구축하고 관리하는 대신, AWS가 제공하는 관리형 솔루션을 통해 더 간편하고 효율적으로 IT 인프라를 운영할 수 있도록 도움
+
+    - **보안 강화** → 보안 모니터링 및 해결(예방 및 탐지 제어)
+    - **자동화** → 자동 백업, 패치 관리, 모니터링 등 
+    - **규정 준수 강화**
+    - **운영 비용 및 AWS 비용 절감**
+
+- **AWS 관리형 서비스의 종류와 특징**
+    - AWS Lambda
+        - 서버리스 컴퓨팅
+        - Virtual functions
+        - 이벤트 기반 실행(Event-Driven), 반응형 서비스 → 특정 시기에만 실행하는 경우 적합 
+        - 사용한 만큼만 비용 청구(pay-as-you-go) 
+            > Pay per duration: (in increment of 1ms)
+            > - `400,000GB-seconds` of compute time per month if FREE
+            > - == 400,000 seconds if function is `1GB` RAM
+            > - == 3,200,000 seconds if function is `128MB` RAM
+            > - After that $1.00 for `600,000GB-seconds`
+        - 전체 AWS 서비스와 쉽게 통합, CloudWatch를 통한 모니터링 
+
+    - Amazon RDS(Relational Database Service)
+        - <u>데이터베이스 인스턴스에 SSH를 통해 연결할 수 없음</u>
+        - MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server, IBM DB2, Aurora(AWS Proprietary database) 지원
+
+    - Amazon DynamoDB
+        - NoSQL
+        - 고가용성, 고성능, 완전관리형 데이터베이스(3AZ<sup>Availability Zone</sup>) → 오토 스케일링 
+        - 분산된 서버리스 데이터베이스(distributed "<u>**serverless**</u>" database)
+        - 검색 지연 시간이 한 자릿수 밀리초 성능(<u>**low latency retrieval**</u>) → 실시간 애플리케이션에 적합 
+        - 프로비저닝이 필요하지 않음 
+
+    - Amazon Aurora
+        - 클라우드 기반, 클라우드에 최적화
+        - 스토리지 10GB 단위로 최대 128TB까지 자동으로 증가 
+        - RDS와 비교하여 20% 정도 비싸지만 효율적 
+        - AWS Free Tier에 미포함 
+        - MySql, PostgreSQL 지원 
+
+    - Amazon Aurora Serverless
+        - 자동 스케일링 → <u>관리 오버헤드가 없는</u> 
+
+    - Amazon Elastic Container Service(Amazon ECS)
+    - Amazon Elastic Kubernetes Service(Amazon EKS)
+    - AWS Elastic Beanstalk
+    - Amazon CloudFront
