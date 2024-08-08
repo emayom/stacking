@@ -253,4 +253,20 @@
     - Amazon Elastic Container Service(Amazon ECS)
     - Amazon Elastic Kubernetes Service(Amazon EKS)
     - AWS Elastic Beanstalk
+        - 서비스형 플랫폼(PaaS)
+            - 모든 EC2 인스턴스 구성과 운영 체제는 Beanstalk가 자체적으로 관리 
+            - 배포 전략을 구성할 수 있지만, 배포 자체는 Elastic Beanstalk가 자동으로 수행
+        - 개발자 중심의 관점(developer centeric view)
+        - 다양한 프로그래밍 언어 및 플랫폼 지원 
+        - **Health Monitoring**
+
+        - 아키텍쳐 모델 
+            - 단일 인스턴스 배포 → 개발 환경
+            - LB<sup>Load Balancer</sup> + ASG<sup>Auto Scaling Groups</sup> → 프로덕션 혹은 프리 프로덕션 환경 
+            - ASG only → 웹이 아닌 환경에서 운영
+
     - Amazon CloudFront
+        - <u>Content Delivery Network(CDN) 서비스</u> 
+        - 글로벌 엣지 로케이션(edge locations) → 콘텐츠 캐싱 및 제공
+        - DDos 공격 방어(AWS Shield Standard), SSL/TLS 암호화, 액세스 제한 가능 
+        - Origins → EC2, Elastic Load Balancer, Custom Origin(Application Load Balancer / EC2 인스턴스 / S3 웹사이트 등
