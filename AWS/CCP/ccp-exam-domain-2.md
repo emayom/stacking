@@ -118,6 +118,61 @@
 - **AWS Firewall Manager**  
     AWS Organizations의 여러 계정과 애플리케이션 <u>전반의 방화벽 규칙을 중앙에서 구성하고 관리</u>할 수 있는 보안 관리 서비스  
 
+    - 언제든지 모든 계정에 걸쳐 규정이 일관되게 관리됨을 보장 
+
+- **Penetration Testing** 
+    - 허용 서비스(AWS 승인 불필요) `종류 출제 범위 ✗`
+    <small>
+        - Amazon EC2 인스턴스, WAF, NAT Gateways, Elastic Load Balaners
+        - Amazon RDS
+        - Amazon CloudFront
+        - Amazon Aurora
+        - Amazon API Gateways
+        - AWS Lambda, Lambda Edge functions
+        - Amazon Lightsail 리소스
+        - Amazon Elastic Beanstalk 환경 등 
+    </small>
+
+    - 금지 활동 → AWS의 인프라를 공격하는 것으로 간주 
+        - Amazon Route 53 Hosted Zones를 통한 DNS zone walking
+        - Route 53를 통하여 DNS 하이재킹
+        - Route 53를 통하여 DNS 파밍
+        - DoS, DDoS, 모의 DoS, 모의 DDoS
+        - 포트 플러딩, 프로토콜 플러딩, 요청 플러딩
+
+
+- **AWS KMS, CloudHSM 기반 데이터 암호화**  
+    - 암호화 방식
+        - Data **at Rest**(저장 중 암호화)  
+            → 데이터가 물리적으로 데이터 저장소나 디바이스에 저장됨 
+
+            - 서버 측 암호화
+            - 클라이언트 측 암호화 
+        - Data **in Transit**(전송 중 암호화) → 네트워크 상에 전송되며 
+
+    - 암호화 서비스  
+        - **AWS KMS(Key Management Service)**  
+            <u>데이터 암호화 시 사용되는 암호화 Key를 쉽게 생성 및 제어할 수 있게 해주는 관리형 서비스</u> 
+
+            - KMS Key의 종류 
+                - 고객 관리 키(Customer Managed Key) → 사용자가 직접 생성하고 관리하며, 접근 권한 설정 가능 
+                - AWS 관리 키(AWS Managed Key) → AWS가 자동으로 생성하고 관리하며, 고객은 직접 제어 불가능 
+                - AWS 소유 키(AWS Owned Key) → AWS가 소유하고 관리하며, 고객은 접근 불가능 
+            
+        - **AWS CloudHSM** → 고객이 직접 암호화 키 관리 :warning:  
+            하드웨어 보안 모듈(HSM)을 제공하여 암호화 키를 생성하고 관리할 수 있게 해주는 서비스  
+            → 높은 보안 수준과 규제 준수를 요구하는 환경에 적합
+
+            - AWS에서 암호화에 이용되는 하드웨어만 제공 
+            - FIFS 140-2 레벨 3 검증 HSM(Hardware Security Module)을 사용하여 암호화 키 관리 → Tamper-resistant
+
 #### 2.3 AWS 액세스 관리 기능 식별
+- **AWS IAM(Identity and Access Management)**
+
+- **AWS root 유저 계정**
+
+- **최소 권한 원칙(Least Privilege)**
+
+**AWS IAM Identity Center (AWS Single Sign-On)**
 
 #### 2.4 보안을 위한 구성 요소 및 리소스 파악
