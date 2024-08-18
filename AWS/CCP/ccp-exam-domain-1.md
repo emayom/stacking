@@ -1,26 +1,26 @@
 # AWS Certified Cloud Practitioner(CLF-C02) 
-### Domain 1: Cloud Concepts
+### Domain 1: Cloud Concepts 🌕🌕🌗🌑🌑
 #### 1.1 AWS 클라우드의 이점 정의
 - **클라우드 컴퓨팅이란?**  
     - <u>on-demand delivery</u>  
         컴퓨팅 파워, 데이터베이스 저장소, 애플리케이션, 다른 IT 리소스들을 온디맨드로 제공하는 것
     - <u>pay-as-you-go pricing</u>  
-        클라우드 서비스 플랫폼을 통해 종량 과금제 방식 제공
+        클라우드 서비스 플랫폼을 통해 **종량 과금제 방식** 제공
     - provision exactly the right type and size of computing   
       필요한 컴퓨팅 리소스의 유형과 크기에 따라 프로비저닝 가능
     - almost instantly 
     - simple way to access    
 
 - **클라우드 컴퓨팅의 6가지 이점** 
-    - 고정 비용을 가변 비용으로 전환 
+    - 선행 비용을 가변 비용으로 전환 
         - 초기 자본 지출(CAPEX) 절감 
         - 총 소유 비용(TCO)와 운영 비용(OPEX) 절감
     - 규모의 경제(economies of scale)의 이점
       - 높은 규모의 경제 달성을 통한 단위당 비용 감소 
     - 용량 추정 불필요 
-    - 조직 민첩성 증가
+    - 속도 및 민첩성 증가
     - 데이터 센터 운영 및 유지 비용 불필요
-    - 글로벌 배포 가능(글로벌 인프라)
+    - 몇 분 만에 글로벌 배포 가능(글로벌 인프라)
 
 - **클라우드 컴퓨팅 모델**
     | On-premises | IaaS | PaaS | SaaS | 
