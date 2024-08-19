@@ -77,7 +77,7 @@
             - 클라이언트 측 데이터 암호화 
 
 #### 2.2 AWS 클라우드 보안, 거버넌스 및 규정 준수(Compliance) 개념 이해
-- **AWS Shield**   
+- **AWS Shield** ❗️   
     DDoS 공격으로 부터 웹 애플리케이션 보호하는 관리 서비스 
     - AWS Shield Standard
         - 모든 AWS 고객에게 제공, 추가 비용 없음
@@ -96,7 +96,7 @@
 
     - Layer7(L7)의 웹 취약점 공격으로부터 보호 
     - Application Load Balancer(ALB), Amazon API Gateway REST API, Amazon CloudFront 등의 리소스 유형 보호 
-    - Web ACL(Access Control List)를 사용하여 보호 
+    - **Web ACL(Access Control List)**를 사용하여 보호 
         - SQL injection, Cross-Site Scripting(XSS)와 같은 일반적인 공격으로부터 보호 
         - Size constraint, geographic match(특정 국가 허용/차단) 설정
         - Rate-based rules → 요청이 너무 빠른 속도로 수신될 때 수신 요청 수를 계산하고 요청 속도를 제한
@@ -166,6 +166,38 @@
             - AWS에서 암호화에 이용되는 하드웨어만 제공, 고객이 HSM의 모든 운영 및 보안을 직접 관리
             - FIFS 140-2 레벨 3 검증 HSM(Hardware Security Module)을 사용하여 암호화 키 관리 → Tamper-resistant
 
+- **AWS Artifact** → 실제 서비스 ✗ ❗️    
+    AWS 보안 및 규정 준수 보고서 및 일부 온라인 계약에 대한 **온디맨드 액세스**를 제공하는 서비스
+
+    - Artifact Reports   
+        - 외부 감사 기관이 작성한 **규정 준수 보고서** 제공 
+        - 다운로드 가능, 보안이나 규제 표준 준수 정보에 액세스할 수 있도록 지원
+
+    - Artifact Agreements  
+        <u>개별 계정 및 AWS Organizations 내 모든 계정에 대한 AWS와의 계약 검토, 수락 및 관리</u> 
+
+        - BAA(Business Associate Addendum): 
+        - GDPR(General Data Protection Regulation): 일반 데이터 보호 규정
+        - **HIPAA**(Health Insurance Portability and Accountability): 미국 건강 보험 양도 및 책임에 관한 법
+
+    - 모든 규정 준수 정보를 한 곳에서 확인하고 싶다면 → **AWS 규정 준수 센터** 
+
+- **Amazon GuardDuty** ❗️  
+    AWS 계정 및 워크로드에서 악의적 활동을 모니터링하고 상세한 보안 조사 결과를 제공하는 **지능형 위협 탐지 서비스**
+
+    - 위협 분석 대상 
+        - VPC Flow Logs → 네트워크 트래픽 패턴을 분석
+        - CloudTrail Logs → API 호출 및 사용자 활동 모니터링
+        - DNS Logs(AWS DNS) → DNS 쿼리와 관련된 활동 추적
+        - Optional  
+            - S3 Logs S3 
+            - EBS Volumnes
+            - Lambda Network Activity  
+            - RDS & Aurora Login Activity 
+            - EKS Audit Logs & Runtime Monitoring
+
+- **Amazon Inspector** ❗️  
+
 #### 2.3 AWS 액세스 관리 기능 식별
 - **AWS IAM(Identity and Access Management)**  
     AWS 서비스와 리소스에 대한 액세스를 안전하게 제어/관리할 수 있는 서비스   
@@ -204,23 +236,47 @@
     중앙 집중식으로 사용자, 그룹 및 역할을 제어하고 관리하는 데 도움을 주는 서비스  
     (한 번의 로그인으로 조직의 여러 AWS 계정과 애플리케이션에 접근 가능)   
  
+- **AWS Secrets Manager**  
+    애플리케이션에서 사용하는 비밀·보안 정보를 안전하게 저장하고 관리하는 데 도움을 주는 서비스  
+
+    - AWS Key Management Service(KMS)를 통해 자동으로 암호화 
+    - AWS Identity and Access Management(IAM)를 통해 접근 권한 제어 가능 
+    - 모니터링, 버전 관리 가능 
+    - 비밀·보안 정보 예시  
+        - 데이터베이스 자격 증명
+        - API 키
+        - OAuth 토큰
+        - SSH 키
+        - TLS/SSL 인증서 및 개인 키
+        - 일반 텍스트 또는 JSON 형식의 기타 민감한 정보 
+
+- **AWS Systems Manager(SSM)**
+    클라우드와 온프레미스 환경에서 시스템과 애플리케이션의 운영을 간소화하고 자동화하는 데 도움을 주는 서비스   
+    → Hybrid AWS 서비스 
+
+    - 주요 기능
+        - Patch Manager → 패치 자동화 
+        - Run Command → 여러 개의 인스턴스 대상으로 동시에 명령어 실행 
+        - SSM Parameter Store를 통한 Parameter 구성 저장
+        - SSM Session Manager  
+            EC2 인스턴스나 온프레미스 서버에 시큐어 셸 시작 가능  
+            SSH 액세스, Bastion Host, SSH 키 관리 불필요, SSH 포트(22) 불필요   
+
 #### 2.4 보안을 위한 구성 요소 및 리소스 파악
 
-- **AWS Organizations**
+- **AWS Trusted Advisor** `모니터링 및 분석` ❗️  
+    AWS 모범 사례에 따라 **실시간 권장 사항**을 제안해주는 서비스
+    
+    - AWS Trusted Advisor 대시 보드에 카테고리별 요약된 권장 항목 표시  
+        → `조치 권장`, `조사 권장`, `감지된 문제 없음`, `검사 제외` 항목으로 분류 제공 
 
-- **AWS Artifact** → 실제 서비스 ✗    
-    AWS 보안 및 규정 준수 보고서 및 일부 온라인 계약에 대한 **온디맨드 액세스**를 제공하는 서비스
+    - 검사 범주
+        - **비용 최적화(Cost Optimization)**  
+        - **성능(Performance)**  
+        - **보안(Security)**  
+        - **내결함성(Fault Tolerance)**  
+        - **서비스 한도(Server Limits)**  
+        - **운영 우수성(Operational Excellence)**
 
-    - Artifact Reports   
-        - 외부 감사 기관이 작성한 **규정 준수 보고서** 제공 
-        - 다운로드 가능, 보안이나 규제 표준 준수 정보에 액세스할 수 있도록 지원
-
-    - Artifact Agreements  
-        <u>개별 계정 및 AWS Organizations 내 모든 계정에 대한 AWS와의 계약 검토, 수락 및 관리</u> 
-
-        - BAA(Business Associate Addendum): 
-        - GDPR(General Data Protection Regulation): 일반 데이터 보호 규정
-        - **HIPAA**(Health Insurance Portability and Accountability): 미국 건강 보험 양도 및 책임에 관한 법
-
-    - 모든 규정 준수 정보를 한 곳에서 확인하고 싶다면 → **AWS 규정 준수 센터** 
+    - 각 플랜에 따라 제공되는 검사 항목 구분 
 
