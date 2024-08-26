@@ -1,6 +1,6 @@
 # AWS Certified Cloud Practitioner(CLF-C02) 
 ### Domain 2: Security and Compliance 🌕🌕🌕🌑🌑
-#### 2.1 AWS 공동 책임 모델(Shared Responsibility Model) 정의
+#### 2.1 AWS 공동 책임 모델(Shared Responsibility Model) 정의 ❗️
 ![image](https://github.com/user-attachments/assets/f2c624ab-8452-4061-a3f4-3240ee1a2c81)
 
 - **AWS 책임**   
@@ -92,11 +92,11 @@
 
 - **AWS WAF(Web Application Firewall)**  
     보호된 웹 애플리케이션 리소스에 전달되는 <u>HTTP(S) 요청을 모니터링할 수 있는</u> 웹 애플리케이션 방화벽  
-    → 웹의 비정상 트래픽을 탐지하고 차단하기 위한 방화벽(단순 방화벽: TCP/IP 레벨에 포함된 정보 기반)
+    → 웹의 비정상 트래픽을 탐지하고 차단하기 위한 방화벽(**단순 방화벽**: TCP/IP 레벨에 포함된 정보 기반)
 
     - Layer7(L7)의 웹 취약점 공격으로부터 보호 
     - Application Load Balancer(ALB), Amazon API Gateway REST API, Amazon CloudFront 등의 리소스 유형 보호 
-    - **Web ACL(Access Control List)**를 사용하여 보호 
+    - **Web ACL(Access Control List)** 를 사용하여 보호 
         - SQL injection, Cross-Site Scripting(XSS)와 같은 일반적인 공격으로부터 보호 
         - Size constraint, geographic match(특정 국가 허용/차단) 설정
         - Rate-based rules → 요청이 너무 빠른 속도로 수신될 때 수신 요청 수를 계산하고 요청 속도를 제한
@@ -166,8 +166,15 @@
             - AWS에서 암호화에 이용되는 하드웨어만 제공, 고객이 HSM의 모든 운영 및 보안을 직접 관리
             - FIFS 140-2 레벨 3 검증 HSM(Hardware Security Module)을 사용하여 암호화 키 관리 → Tamper-resistant
 
+- **AWS Certificate Manager(ACM)**  
+    **SSL/TLS 인증서**를 쉽게 프로비전, 관리, 배포할 수 있는 관리형 서비스 
+
+    - TLS 인증서 자동 갱신(관리형 갱신)
+    - HTTPS를 통해 전송 중 암호화 지원
+    - AWS의 여러 서비스와 통합되어 인증서를 쉽게 배포하고 관리 가능
+
 - **AWS Artifact** → 실제 서비스 ✗ ❗️    
-    AWS 보안 및 규정 준수 보고서 및 일부 온라인 계약에 대한 **온디맨드 액세스**를 제공하는 서비스
+    AWS **보안 및 규정 준수** 보고서 및 일부 온라인 계약에 대한 **온디맨드 액세스**를 제공하는 서비스
 
     - Artifact Reports   
         - 외부 감사 기관이 작성한 **규정 준수 보고서** 제공 
@@ -196,7 +203,11 @@
             - RDS & Aurora Login Activity 
             - EKS Audit Logs & Runtime Monitoring
 
-- **Amazon Inspector** ❗️  
+- **Amazon Inspector** ❗️ `보안 평가`  
+    AWS 워크로드의 **소프트웨어 취약성**과 **의도하지 않은 네트워크 노출 여부**을 탐지하는 **자동화**된 취약성 관리 서비스 
+
+    - 실행 중인 Amazon EC2 인스턴스, Amazon ECR 컨테이너 이미지, AWS Lambda 함수 자동 검색 및 스캔 → 결과 보고서 
+    - Amazon Inspector 위험 점수 기반 문제 해결의 우선순위 → 평균 문제 해결 시간(MTTR) 단축
 
 #### 2.3 AWS 액세스 관리 기능 식별
 - **AWS IAM(Identity and Access Management)**  
@@ -216,10 +227,10 @@
         - <u>일상적인 작업, 관리 작업 용도로 사용으로 사용하지 말 것</u> 
         - Multi-Factor Authentication 활성화, 액세스 키 잠금 권장
     
-    - **루트 사용자만 수행할 수 있는 테스크**
+    - **루트 사용자만 수행할 수 있는 테스크** ❗️  
         - **계정 설정(계정 이름, 이메일 주소, 루트 유저 비밀번호, 루트 유저 액세스 키 등의 변경)**
         - 세금 계산서 열람
-        - **계정 close** 
+        - **AWS 계정 삭제** 
         - IAM 유저 권한 복구 
         - **AWS Support plan 변경 및 취소** 
         - **Reserved Instance Marketplace 판매자 등록** 
@@ -239,6 +250,7 @@
 - **AWS Secrets Manager**  
     애플리케이션에서 사용하는 비밀·보안 정보를 안전하게 저장하고 관리하는 데 도움을 주는 서비스  
 
+    - <u>Amazon RDS와의 통합 지원</u> → 인스턴스 암호 관리 간소화(비밀번호 정기적, 자동 교체)
     - AWS Key Management Service(KMS)를 통해 자동으로 암호화 
     - AWS Identity and Access Management(IAM)를 통해 접근 권한 제어 가능 
     - 모니터링, 버전 관리 가능 
@@ -250,17 +262,20 @@
         - TLS/SSL 인증서 및 개인 키
         - 일반 텍스트 또는 JSON 형식의 기타 민감한 정보 
 
-- **AWS Systems Manager(SSM)**
+- **AWS Systems Manager(SSM)**  
     클라우드와 온프레미스 환경에서 시스템과 애플리케이션의 운영을 간소화하고 자동화하는 데 도움을 주는 서비스   
     → Hybrid AWS 서비스 
 
     - 주요 기능
         - Patch Manager → 패치 자동화 
         - Run Command → 여러 개의 인스턴스 대상으로 동시에 명령어 실행 
-        - SSM Parameter Store를 통한 Parameter 구성 저장
-        - SSM Session Manager  
-            EC2 인스턴스나 온프레미스 서버에 시큐어 셸 시작 가능  
-            SSH 액세스, Bastion Host, SSH 키 관리 불필요, SSH 포트(22) 불필요   
+        - **SSM Parameter Store**
+            - 구성 데이터나 암호를 안전하게 AWS에 저장해주는 방식
+            - Serverless, scalable, durable, easy SDK
+            - IAM을 활용한 파라미터 엑세스 컨트롤 
+        - **SSM Session Manager**  
+            - EC2 인스턴스나 온프레미스 서버에 시큐어 셸 시작 가능  
+            - SSH 액세스, Bastion Host, SSH 키 관리 불필요, SSH 포트(22) 불필요   
 
 #### 2.4 보안을 위한 구성 요소 및 리소스 파악
 
@@ -279,4 +294,3 @@
         - **운영 우수성(Operational Excellence)**
 
     - 각 플랜에 따라 제공되는 검사 항목 구분 
-

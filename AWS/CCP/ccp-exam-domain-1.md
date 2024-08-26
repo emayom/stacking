@@ -265,8 +265,8 @@
             - LB<sup>Load Balancer</sup> + ASG<sup>Auto Scaling Groups</sup> → 프로덕션 혹은 프리 프로덕션 환경 
             - ASG only → 웹이 아닌 환경에서 운영
 
-    - Amazon CloudFront
-        - <u>Content Delivery Network(CDN) 서비스</u> 
-        - 글로벌 엣지 로케이션(edge locations) → 콘텐츠 캐싱 및 제공
+    - Amazon CloudFront ❗️
+        - <u>글로벌 Content Delivery Network(CDN) 서비스</u> 
+        - **엣지 로케이션(edge locations) → 콘텐츠 캐싱 및 제공**
         - DDos 공격 방어(AWS Shield Standard), SSL/TLS 암호화, 액세스 제한 가능 
         - Origins → EC2, Elastic Load Balancer, Custom Origin(Application Load Balancer / EC2 인스턴스 / S3 웹사이트 등
