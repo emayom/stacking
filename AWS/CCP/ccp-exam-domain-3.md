@@ -209,12 +209,12 @@
 #### 3.5 AWS 네트워크 서비스 파악
 - **Amazon Virtual Private Cloud(Amazon VPC)**  
     AWS 리소스에 경계를 설정하는 데 사용할 수 있는 가상 네트워크 서비스  
-    → 사용자가 AWS 리소스를 논리적으로 격리된 가상 네트워크 환경에서 운영할 수 있도록
+    → 사용자가 AWS 리소스를 <u>논리적으로 격리된</u> 가상 네트워크 환경에서 운영할 수 있도록
 
     - 특정 리전과 연결, 특정 리전 내에서 작동하는 가상 네트워크(여러 리전 → 여러 VPC) 
     - 구성 요소
         - **서브넷(Subnet)**   
-            VPC 내부 네트워크의 파티션(가용 영역 수준 리소스)  
+            VPC 내의 네트워크 파티션(가용 영역 수준 리소스)  
             - 공용 서브넷(Public Subnet) → 인터넷 접근 가능
             - 사설 서브넷(Private Subnet) → 인터넷 접근 제한 
         - **라우팅 테이블(Routing Table)**  
@@ -222,15 +222,23 @@
         - **인터넷 게이트웨이(Internet Gateway, IGW)**  
             VPC 인스턴스가 인터넷에 바로 연결되도록 도움 
         - **NAT 게이트웨이 및 NAT 인스턴스**  
-            사설 서브넷 내의 인스턴스가 사설인 상태를 유지하면서 인터넷에 액세스하도록 
-            - NAT(Network Address Translation) 게이트웨이 → AWS-managed
-            - NAT 인스턴스 → self-managed
-        - **보안 그룹(Security Group)** `인스턴스 수준`
-        - **네트워크 ACL(Network Access Control List, NACL)** `서브넷 수준` 
-        - **Elastic IP(EIP)**
+            - NAT(Network Address Translation) 게이트웨이    
+                → 사설 서브넷 내의 인스턴스가 프라이빗 상태를 유지하면서 인터넷에 연결할 수 있도록  
+            - NAT 인스턴스  
+                → self-managed
+        - **보안 그룹(Security Group)** `인스턴스 · ENI 수준`   
+            - 상태 저장  
+            - 기본적으로 모든 인바운드 트래픽을 거부 
+        - **네트워크 ACL(Network Access Control List, NACL)** 
+            - **서브넷 수준**에서 작동하는 방화벽 역할 
+            - ALLOW(허용) 및 DENY(거부) 규칙이 모두 존재 
+        - **Elastic IP(EIP)**  
+            - 고정된 공용 IPv4
         - **VPC 피어링(VPC Peering)**  
-            AWS의 네트워크를 사용해 다른 VPC와 프라이빗으로 연결함으로써, 마치 동일한 네트워크처럼 동작하도록 
+            AWS의 네트워크를 사용해 다른 VPC와 프라이빗으로 연결함  
+            → 마치 동일한 네트워크처럼 동작하도록 
         - **VPC 엔드포인트(VPC Endpoint)**
+            - AWS PrivateLink
 
 - **Amazon Route 53**  
     관리형 DNS(Domain Name System) 웹 서비스  
@@ -267,12 +275,15 @@
         - **Public 인터넷**을 통해 연결 → 대역폭 제한, 보안 문제 발생 가능
         - 약 5분 정도의 빠른 설정 
 
-
     - **AWS Direct Connect(DX)** ❗️  
-        - 온프레미스 데이터 센터와 VPC 간에 **비공개 전용 연결(private network)** 을 설정
+        - 온프레미스 데이터 센터와 AWS 클라우드 간에 빠르고 안전한 **비공개 전용 연결(private network)** 을 설정
         - 짧은 지연 시간, 최대한 높은 수준의 보안 → 느린 설정, 높은 비용 
         - 높은 수준의 규제 및 규정 준수 요구사항을 쉽게 충족, 잠재적 대역폭 문제 방지 
         - 네트워크 비용을 절감하고, 네트워크를 통과할 수 있는 대역폭을 늘리는 데 도움
+
+    - **AWS Transit Gateway**  
+        - 여러 VPC(대규모)와 온프레미스 네트워크를 하나의 중앙 허브를 통해 연결(peering)할 수 있게 해주는 서비스  
+            → Hub & Spoke 형태 
 
 #### 3.6 AWS 스토리지 서비스 파악
 - **EC2 인스턴스 스토어**
@@ -339,4 +350,37 @@
 - **AWS Storage Gateway**
 
 #### 3.7 AWS 인공 지능 및 기계 학습(AI/ML) 서비스와 분석 서비스 파악
+
+- AI/ML 서비스
+    - **Amazon Rekognition**  
+        이미지 및 비디오 분석 서비스 → 사람, 텍스트, 객체 등을 인식하고 분석
+    - **Amazon Transcribe**  
+        음성을 텍스트로 자동 변환해주는 서비스
+        - Redaction을 이용하여 개인 식별 정보(Personally Identifiable Information, PII) 자동 제거 기능 
+        - 다국어 오디오에 대한 자동 언어 식별 기능 지원 
+    - **Amazon Polly**  
+        텍스트를 음성으로 변환해주는 서비스(TTS)
+    - **Amazon Translate**  
+        실시간 언어 번역을 제공하는 자동 번역 서비스
+    - **Amazon SageMaker**  
+        **ML 모델을 신속하게 빌드, 훈련, 배포할 수 있도록** 돕는 고차원의 완전 관리형 머신러닝 서비스
+    - **Amazon Lex**  
+        음성과 텍스트를 사용해 대화형 인터페이스(챗봇, 음성 비서 등)를 구축할 수 있는 서비스  
+    - **Amazon Textract**  
+        문서에서 텍스트 및 데이터 자동 추출 서비스
+    - **Amazon Forcast**  
+        예측 서비스
+    - **Amazon Kendra**  
+        엔터프라이즈 검색 서비스 → 자연어 검색으로 다양한 형식(텍스트, PDF, HTML, PPT, MS Word 등) 정보 검색 가능 
+    - **Amazon Personalize**  
+        개인화된 추천 시스템 구축 서비스 
+    - **Amazon Comprehend**  
+        완전 관리형 서버리스 자연어 처리(NLP) 서비스 → 텍스트에서 인사이트를 추출, 관계성 분석 
+
+- 데이터 분석을 위한 서비스
+    - **Amazon Athena**  
+    - **Amazon Kinesis**  
+    - **AWS Glue**  
+    - **Amazon QuickSight**  
+
 #### 3.8 시험 범위에 포함되는 다른 AWS 서비스 범주의 서비스 파악
