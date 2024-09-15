@@ -78,7 +78,8 @@
 
 #### 2.2 AWS 클라우드 보안, 거버넌스 및 규정 준수(Compliance) 개념 이해
 - **AWS Shield** ❗️   
-    DDoS 공격으로 부터 웹 애플리케이션 보호하는 관리 서비스 
+    > `DDos 공격으로부터 보호`  
+
     - AWS Shield Standard
         - 모든 AWS 고객에게 제공, 추가 비용 없음
         - SYN/UDP/ACK Floods, Reflection attacks, Layer3/4 공격 방지 
@@ -116,8 +117,9 @@
     - DDoS와 같은 볼륨 공격을 완화하도록 설계된 것은 아님 
 
 - **AWS Firewall Manager**  
-    AWS Organizations의 여러 계정과 애플리케이션 <u>전반의 방화벽 규칙을 중앙에서 구성하고 관리</u>할 수 있는 보안 관리 서비스  
+    > `방화벽 규칙 중앙 구성 · 관리`
 
+    - AWS Organizations의 여러 계정과 애플리케이션 전반의 <u>방화벽 규칙을 중앙에서 구성하고 관리</u>
     - 언제든지 모든 계정에 걸쳐 규정이 일관되게 관리됨을 보장 
 
 - **Penetration Testing** 
@@ -159,11 +161,13 @@
                 - AWS 관리 키(AWS Managed Key) → AWS가 자동으로 생성하고 관리하며, 고객은 직접 제어 불가능 
                 - AWS 소유 키(AWS Owned Key) → AWS가 소유하고 관리하며, 고객은 접근 불가능 
             
-        - **AWS CloudHSM** → 고객이 직접 암호화 키 관리 :warning:  
+        - **AWS CloudHSM**
+            > `암호화`, `하드웨어 보안 모듈(HSM) 제공`
+
             하드웨어 보안 모듈(HSM)을 제공하여 암호화 키를 생성하고 관리할 수 있게 해주는 서비스  
 
             - 높은 보안 수준과 규제 준수를 요구하는 환경에 적합
-            - AWS에서 암호화에 이용되는 하드웨어만 제공, 고객이 HSM의 모든 운영 및 보안을 직접 관리
+            - **AWS에서 암호화에 이용되는 하드웨어만 제공, 고객이 HSM의 모든 운영 및 보안을 직접 관리**
             - FIFS 140-2 레벨 3 검증 HSM(Hardware Security Module)을 사용하여 암호화 키 관리 → Tamper-resistant
 
 - **AWS Certificate Manager(ACM)**  
@@ -174,7 +178,9 @@
     - AWS의 여러 서비스와 통합되어 인증서를 쉽게 배포하고 관리 가능
 
 - **AWS Artifact** → 실제 서비스 ✗ ❗️    
-    AWS **보안 및 규정 준수** 보고서 및 일부 온라인 계약에 대한 **온디맨드 액세스**를 제공하는 서비스
+    > `보안 및 규정 준수 보고서` 
+
+    AWS **보안 및 규정 준수 보고서** 및 일부 온라인 계약에 대한 **온디맨드 액세스**를 제공하는 서비스
 
     - Artifact Reports   
         - 외부 감사 기관이 작성한 **규정 준수 보고서** 제공 
@@ -190,7 +196,9 @@
     - 모든 규정 준수 정보를 한 곳에서 확인하고 싶다면 → **AWS 규정 준수 센터** 
 
 - **Amazon GuardDuty** ❗️  
-    AWS 계정 및 워크로드에서 악의적 활동을 모니터링하고 상세한 보안 조사 결과를 제공하는 **지능형 위협 탐지 서비스**
+    > `지능형 위협 탐지 기능`
+
+    AWS 인프라 및 리소스에 대한 **지능형 위협 탐지 기능** 제공 서비스
 
     - 위협 분석 대상 
         - VPC Flow Logs → 네트워크 트래픽 패턴을 분석
@@ -203,11 +211,50 @@
             - RDS & Aurora Login Activity 
             - EKS Audit Logs & Runtime Monitoring
 
-- **Amazon Inspector** ❗️ `보안 평가`  
-    AWS 워크로드의 **소프트웨어 취약성**과 **의도하지 않은 네트워크 노출 여부**을 탐지하는 **자동화**된 취약성 관리 서비스 
-
+- **Amazon Inspector** ❗️  
+    > `보안 평가 자동화`, `의도하지 않은 네트워크 액세스`, `소프트웨어 취약성 탐지`
+    
+    - AWS 워크로드의 **소프트웨어 취약성**과 **의도하지 않은 네트워크 노출 여부**을 탐지하는 자동화된 취약성 관리 서비스 
     - 실행 중인 Amazon EC2 인스턴스, Amazon ECR 컨테이너 이미지, AWS Lambda 함수 자동 검색 및 스캔 → 결과 보고서 
     - Amazon Inspector 위험 점수 기반 문제 해결의 우선순위 → 평균 문제 해결 시간(MTTR) 단축
+
+- **Amazon CloudWatch** ❗️  
+    > `리소스 성능 모니터링`, `이벤트 및 경고`  
+
+    AWS 리소스에 대한 지표를 수집하고 추적하는 모니터링 서비스
+
+    - 리소스 사용률 및 성능 모니터링
+    - 단일 대시보드에서 지표에 액세스
+    - AWS Lambda와 Amazon CloudWatch 결합 → 트리거 기반 서버리스 로그 솔루션 구축 
+
+- **Amazon CloudWatch Logs**
+    > `로그 중앙 집중화`
+
+    - Amazon EC2 인스턴스, AWS CloudTrail, Route 53 및 온프레미스 서버와 같은 기타 소스에서 로그 파일을 모니터링, 저장 및 액세스 가능 
+    - 애플리케이션 및 AWS 서비스의 로그 중앙 집중화 
+
+- **AWS CloudTrail** ❗️  
+    > `계정별 활동 및 감사`
+
+    - 애플리케이션 및 리소스에 대한 모든 사용자 활동(이벤트) 및 API 호출 내역 추적 
+    - 운영 분석 및 문제 해결을 지원하기 위한 이벤트 및 로그 필터링 지원 
+    - 일반적으로 API 호출 후 15분 이내에 CloudTrail에서 업데이트
+    - API 호출 기록 정보 
+        <small>
+        - API 호출을 요청한 사용자 ID
+        - API 호출이 발생한 날짜 및 시간
+        - API 호출에 포함된 리소스 유형 등
+        </small>
+    - CloudTrail Insights 옵션
+        - AWS 계정에서 비정상적인 API 활동 자동 감지
+
+- **AWS X-Ray**
+    > `추석 및 분석`, `디버깅`, `서비스 맵`
+
+    - 애플리케이션 추적 및 시각적 분석
+    - 마이크로서비스 아키텍처(MSA)로 구축된 애플리케이션과 같은 서버리스 및 분산 애플리케이션 분석 및 디버그 가능 
+    - 그래프로 시각화가 가능한 API(X-Ray API) 제공 → Service Map 
+
 
 #### 2.3 AWS 액세스 관리 기능 식별
 - **AWS IAM(Identity and Access Management)**  
@@ -222,7 +269,11 @@
             - **임시로** 권한에 액세스하기 위해 수임할 수 있는 자격 증명 
         - IAM 정책
             - 최소 권한 보안 원칙 준수 
-        - MFA(Multi-Factor Authentication) 
+        - **MFA(Multi-Factor Authentication)** ❗️  
+            - Virtual MFA device → 모바일 디바이스나 컴퓨터에 설치된 앱 사용 
+            - U2F(Universal 2nd Factor) security key → 컴퓨터의 USB 포트에 연결할 수 있는물리적 장치 
+            - Other hardware MFA device → 물리적 장치이지만 연결 ✗, 여섯 자리 숫자 코드를 제공하는 MFA 장치
+            - ~~SMS text message-based MFA~~ `지원 종료`
 
 - **AWS 계정 루트 사용자**
     - 루트 유저 권한 
@@ -242,22 +293,25 @@
         - GovCloud 가입 
 
 - **최소 권한 원칙(Principle of Least Privilege)**  
-    그 어떠한 사용자도 필요한 것 이상으로 권한을 가지고 있어서는 안 된다는 원칙  
-    주기적으로 권한을 검사하여 미사용 권한을 삭제해주는 작업 필요 
+    - 그 어떠한 사용자도 필요한 것 이상으로 권한을 가지고 있어서는 안 됨 
+    - 주기적으로 권한을 검사하여 미사용 권한을 삭제해주는 작업 필요 
 
 - **AWS IAM Identity Center(AWS Single Sign-On)**  
-    AWS Single Sign-On 후속 서비스  
+    > `AWS Single Sign-On 후속 서비스`  
+
     중앙 집중식으로 사용자, 그룹 및 역할을 제어하고 관리하는 데 도움을 주는 서비스  
     (한 번의 로그인으로 조직의 여러 AWS 계정과 애플리케이션에 접근 가능)   
  
 - **AWS Secrets Manager**  
-    애플리케이션에서 사용하는 비밀·보안 정보를 안전하게 저장하고 관리하는 데 도움을 주는 서비스  
+    > `보안 · 기밀 보호`
+
+    애플리케이션에서 사용하는 비밀 · 보안 정보를 안전하게 저장하고 관리하는 데 도움을 주는 서비스  
 
     - <u>Amazon RDS와의 통합 지원</u> → 인스턴스 암호 관리 간소화(비밀번호 정기적, 자동 교체)
     - AWS Key Management Service(KMS)를 통해 자동으로 암호화 
     - AWS Identity and Access Management(IAM)를 통해 접근 권한 제어 가능 
     - 모니터링, 버전 관리 가능 
-    - 비밀·보안 정보 예시  
+    - 비밀 · 보안 정보 예시  
         - 데이터베이스 자격 증명
         - API 키
         - OAuth 토큰
@@ -282,13 +336,15 @@
 
 #### 2.4 보안을 위한 구성 요소 및 리소스 파악
 
-- **AWS Trusted Advisor** `모니터링 및 분석` ❗️  
+- **AWS Trusted Advisor**  ❗️  
+    > `모니터링 및 분석`
+
     AWS 모범 사례에 따라 **실시간 권장 사항**을 제안해주는 서비스
     
     - AWS Trusted Advisor 대시 보드에 카테고리별 요약된 권장 항목 표시  
         → `조치 권장`, `조사 권장`, `감지된 문제 없음`, `검사 제외` 항목으로 분류 제공 
 
-    - 검사 범주
+    - 검사 범주 ❗️ 
         - **비용 최적화(Cost Optimization)**  
         - **성능(Performance)**  
         - **보안(Security)**  

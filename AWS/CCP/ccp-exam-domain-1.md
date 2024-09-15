@@ -34,27 +34,27 @@
     | Storage | ✓ | ✓ | ✓ | 
     | Networking | ✓ | ✓ | ✓ | 
 
-    - IaaS(Infrastructure as a Service)
+    - **IaaS(Infrastructure as a Service)**
         - 높은 유연성과 관리 제어 기능 제공 
         - Amazon EC2 (on AWS), GCP, Azure, Rackspace, Digital Ocean, Linode
-    - PaaS(Platform as a Service)
+    - **PaaS(Platform as a Service)**
         - 애플리케이션 배포 및 관리에 집중 
         - Elastic Beanstalk (on AWS), Heroku, Google App Engine(GCP), Window Azure(Microsoft)
-    - Saas(Software as a Service)
+    - **Saas(Software as a Service)**
         - 서비스 제공 업체가 완전히 운영 및 관리 
         - Many AWS services, Google Apps(Gmail), Dropbox, Zoom
 
 - **클라우드 컴퓨팅 배포 모델**
-    - Private Cloud(e.g. rackspace)
+    - **Private Cloud(e.g. rackspace)**
         - 온프레미스 방식(on-premises)
         - 단일 조직 (외부에 노출되지 않음)
         - 완전 제어
         - 강화된 보안 제공 
 
-    - Public Cloud(e.g. MS Azure, Google Cloud, AWS)
+    - **Public Cloud(e.g. MS Azure, Google Cloud, AWS)**
         - 서드파티(third- party) 클라우드 서비스 제공 업체가 소유, 운영하는 클라우드 리소스를 인터넷을 통해 제공
 
-    - Hybrid Cloud
+    - **Hybrid Cloud**
         - (Private + Public) Cloud
         - 일부 서버 온프레미스로 유지, 일부 클라우드 확장 
         - 일부 민감 에셋 제어, 유연함 및 비용 효율성 만족 
@@ -166,7 +166,7 @@
     - 조직(Organization)
     - 제품(Product)
 
-- **AWS CAF - Transformation Phases**
+- **AWS CAF - Transformation Phases** ❗️  
     1. 비전 수립 단계(Envision) → 비즈니스 기회 식별
     2. 정렬 단계(Align) → 실행 계획 도출 단계(비즈니스 기회를 CAF 관점과 비교)
     3. 실행 단계(Launch)
@@ -204,6 +204,11 @@
         - <u>대규모 마이그레이션에 적절하지 않음</u>
         - 클라우드 네이티브 기능의 이점을 활용한 애플리케이션 설계 재구상 
         - 확장성, 성능, 보안, 제품 및 기능 출시 가속화, 비용 절감의 비즈니스 요구가 강할 경우 
+
+- **AWS Application Migration Service(AWS MGN)**  
+    > `자동화된 리프트 앤 시프트(Rehost) 솔루션`  
+    
+    - 물리적 서버와 해당 서버에서 실행되는 모든 데이터베이스/애플리케이션을 AWS EC2 인스턴스로 마이그레이션
 
 - **AWS Snow Family**  
     AWS와 고객 간에 최대 엑사바이트 규모의 데이터를 물리적으로 이동할 수 있는 물리적 디바이스 모음  
@@ -290,5 +295,5 @@
     - Amazon CloudFront ❗️
         - <u>글로벌 Content Delivery Network(CDN) 서비스</u> 
         - **엣지 로케이션(edge locations) → 콘텐츠 캐싱 및 제공**
-        - DDos 공격 방어(AWS Shield Standard), SSL/TLS 암호화, 액세스 제한 가능 
+        - DDoS 공격 방어(AWS Shield Standard), SSL/TLS 암호화, 액세스 제한 가능 
         - Origins → EC2, Elastic Load Balancer, Custom Origin(Application Load Balancer / EC2 인스턴스 / S3 웹사이트 등
