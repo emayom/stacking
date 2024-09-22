@@ -42,7 +42,7 @@
         - Elastic Beanstalk (on AWS), Heroku, Google App Engine(GCP), Window Azure(Microsoft)
     - **Saas(Software as a Service)**
         - 서비스 제공 업체가 완전히 운영 및 관리 
-        - Many AWS services, Google Apps(Gmail), Dropbox, Zoom
+        - Many AWS services, Amazon Rekognition, Google Apps(Gmail), Dropbox, Zoom
 
 - **클라우드 컴퓨팅 배포 모델**
     - **Private Cloud(e.g. rackspace)**
@@ -86,7 +86,7 @@
             - 데이터에 쉽게 액세스할 수 없도록 유지
             - 보안 이벤트에 대비
 
-    - **안정성(Reliability)**  
+    - **신뢰성(Reliability)**  
         워크로드의 기능이 필요한 때에 기능을 정확하고 일관되게 수행하는 역량
 
         - 설계 원칙
@@ -134,7 +134,7 @@
     Well-Architected Framework의 5가지 원칙을 기반 → 워크로드 상태를 검토, 최신 AWS 아키텍처 모범 사례와 비교
 
 #### 1.3 AWS 클라우드 마이그레이션의 이점과 전략 이해
-- **AWS Cloud Adoption Framework**  
+- **AWS Cloud Adoption Framework(AWS CAF)**  
     AWS의 경험과 모범 사례에 따라 <u>AWS로 신속하면서도 원활하게 마이그레이션할 수 있도록</u> 조언 제공  
     → 기본적으로 전자책이며 서비스가 아닌 규범적 지침, 백서 
 
@@ -205,25 +205,62 @@
         - 클라우드 네이티브 기능의 이점을 활용한 애플리케이션 설계 재구상 
         - 확장성, 성능, 보안, 제품 및 기능 출시 가속화, 비용 절감의 비즈니스 요구가 강할 경우 
 
+- **AWS Migration Hub**
+    마이그레이션 계획 및 추적
+
 - **AWS Application Migration Service(AWS MGN)**  
     > `자동화된 리프트 앤 시프트(Rehost) 솔루션`  
     
     - 물리적 서버와 해당 서버에서 실행되는 모든 데이터베이스/애플리케이션을 AWS EC2 인스턴스로 마이그레이션
 
-- **AWS Snow Family**  
-    AWS와 고객 간에 최대 엑사바이트 규모의 데이터를 물리적으로 이동할 수 있는 물리적 디바이스 모음  
+- **AWS Database Migration Service(AWS DMS)**   
+    관계형 데이터베이스, 비관계형 데이터베이스 및 기타 유형의 데이터 저장소를 마이그레이션할 수 있는 서비스  
+    → 데이터베이스 마이그레이션 도구  
 
-    - AWS Snowcone
+    - 원본 데이터베이스와 대상 데이터베이스는 유형이 동일할 필요가 없음 
+    - 소스 데이터베이스는 마이그레이션 동안에도 작동 상태 유지 → 애플리케이션 다운타임 최소화
+
+    - 마이그레이션 유형
+        - **동종 마이그레이션**  
+            스키마 구조, 데이터 유형, 데이터베이스 코드가 원본과 대상 사이에서 호환 
+            <small>
+            - MySQL → Amazon RDS for MySQL
+            - Microsoft SQL Server → Amazon RDS for SQL Server
+            - Oracle → Amazon RDS for Oracle
+            </small>
+
+        - **이종 마이그레이션** 
+            1. AWS Schema Conversion Tool을 사용하여 변환
+            2. DMS를 사용하여 원본 데이터베이스의 데이터를 대상 데이터베이스로 마이그레이션
+
+    - 사용 사례 
+        - 개발 및 테스트 데이터베이스 마이그레이션 
+        - 데이터베이스 통합 
+        - 연속 복제 
+
+- **AWS Snow Family**  
+    > `물리적 장치`, `대규모 데이터 클라우드 마이그레이션`, `재해 복구`, `엣지 컴퓨팅`
+
+    AWS와 고객 간에 최대 엑사바이트 규모의 **데이터를 물리적으로 이동**할 수 있는 물리적 디바이스 모음  
+    → 네트워크 경로가 아닌 물리적 경로를 통해 이동(연결성, 대역폭, 비용 문제 대안)
+
+    - **AWS Snowcone** 
+        > `온/오프라인`
         - 엣지 컴퓨팅 및 데이터 전송 디바이스
-        - CPU 2개, 4GB 메모리 및 최대 8TB의 가용 스토리지
-    - AWS Snowball Edge
+        - CPU 2개, 4GB 메모리 및 **최대 8TB**의 가용 스토리지
+
+    - **AWS Snowball Edge** 
+        > `오프라인`, `최대 수 페타바이트 규모`, `반복적인 전송 워크플로우`, `병렬 사용 가능` 
         - Snowball Edge **Storage** Optimized  
             - 대규모 데이터 마이그레이션 및 반복 전송 워크플로뿐 아니라 큰 용량이 필요한 로컬 컴퓨팅에 적합
             - **80TB**의 가용 HDD 스토리지, 1TB SSD 
         - Snowball Edge **Compute** Optimized  
             - 기계 학습, 풀 모션 비디오 분석, 분석 및 로컬 컴퓨팅 스택과 같은 사용 사례를 위한 강력한 컴퓨팅 리소스를 제공
-            - **42TB**의 가용 HDD 스토리지, 7.68TB SSD
-    - AWS Snowmobile  
+            - **42TB**의 가용 HDD 스토리지, 7.68TB SSD 
+
+    - **AWS Snowmobile** 
+        > `오프라인`, `최대 엑사바이트 규모`, `데이터 센터 수준` 
+        - 초대형 데이터 마이그레이션을 위한 트레일러 트럭 기반의 장비
         - 대용량 데이터를 AWS로 이동하는 데 사용하는 엑사바이트 규모의 데이터 전송 서비스
         - 1대당 **최대 100PB**의 데이터 전송 가능
 

@@ -92,15 +92,15 @@
         - AWS EC2, ELB<sup>Elastic Load Balancing</sup>, Amazon CloudFront, AWS Global Accelerator, Route 53 리소스 유형에 정교한 공격 방지
 
 - **AWS WAF(Web Application Firewall)**  
-    보호된 웹 애플리케이션 리소스에 전달되는 <u>HTTP(S) 요청을 모니터링할 수 있는</u> 웹 애플리케이션 방화벽  
-    → 웹의 비정상 트래픽을 탐지하고 차단하기 위한 방화벽(**단순 방화벽**: TCP/IP 레벨에 포함된 정보 기반)
+    보호된 웹 애플리케이션 리소스에 전달되는 <u>HTTP 및 HTTPS 요청을 모니터링할 수 있는</u> 웹 애플리케이션 방화벽  
+    → 웹의 비정상 트래픽을 탐지하고 차단하기 위한 방화벽
 
     - Layer7(L7)의 웹 취약점 공격으로부터 보호 
     - Application Load Balancer(ALB), Amazon API Gateway REST API, Amazon CloudFront 등의 리소스 유형 보호 
     - **Web ACL(Access Control List)** 를 사용하여 보호 
         - SQL injection, Cross-Site Scripting(XSS)와 같은 일반적인 공격으로부터 보호 
         - Size constraint, geographic match(특정 국가 허용/차단) 설정
-        - Rate-based rules → 요청이 너무 빠른 속도로 수신될 때 수신 요청 수를 계산하고 요청 속도를 제한
+        - Rate-based rules(속도 기반 규칙) 사용하여 DDoS 공격 완화 → 요청이 너무 빠른 속도로 수신될 때 IP 주소 자동 차단 
 
 - **AWS Network Firewall**  
     VPC(Virtual Private Cloud)를 위한 관리형 방화벽 서비스  
@@ -122,7 +122,7 @@
     - AWS Organizations의 여러 계정과 애플리케이션 전반의 <u>방화벽 규칙을 중앙에서 구성하고 관리</u>
     - 언제든지 모든 계정에 걸쳐 규정이 일관되게 관리됨을 보장 
 
-- **Penetration Testing** 
+- **침투 테스트(Penetration Testing)** 
     - 허용 서비스(AWS 승인 불필요) `종류 출제 범위 ✗`
     <small>
         - Amazon EC2 인스턴스, WAF, NAT Gateways, Elastic Load Balaners
@@ -212,20 +212,55 @@
             - EKS Audit Logs & Runtime Monitoring
 
 - **Amazon Inspector** ❗️  
-    > `보안 평가 자동화`, `의도하지 않은 네트워크 액세스`, `소프트웨어 취약성 탐지`
+    > `보안 평가 자동화`, `의도하지 않은 네트워크 액세스`, `AWS에 배포된 애플리케이션의 취약성 평가`
     
     - AWS 워크로드의 **소프트웨어 취약성**과 **의도하지 않은 네트워크 노출 여부**을 탐지하는 자동화된 취약성 관리 서비스 
     - 실행 중인 Amazon EC2 인스턴스, Amazon ECR 컨테이너 이미지, AWS Lambda 함수 자동 검색 및 스캔 → 결과 보고서 
     - Amazon Inspector 위험 점수 기반 문제 해결의 우선순위 → 평균 문제 해결 시간(MTTR) 단축
 
+- **AWS Config**  
+    > `리소스별 변경 내역`, `감사`, `규정 준수`, `구성 상태 추적 및 기록`
+
+    AWS 리소스 구성을 지속적으로 모니터링하고 기록, 알림 제공 서비스 
+
+- **AWS Macie**  
+    > `민감 데이터 보호`
+
+    데이터 보안 및 개인 정보 보호 서비스
+
+    - 머신러닝과 패턴 매칭을 사용하여 AWS(특히 S3 버킷)에서 민감 데이터 자동 식별 및 보호 
+        - 민감 데이터: 신용카드 번호, 주민등록번호, 개인 식별 정보(PII) 등 
+    - AWS CloudWatch와 연동 → 민감 데이터 발견, 보안 문제 발생 시 알림 
+
+- **AWS Resource Access Manager(AWS RAM)**
+    여러 계정에서 AWS 리소스를 안전하게 공유할 수 있도록 해주는 서비스
+
+- **AWS Security Hub**  
+    > `보안 중앙 집중화` 
+
+    통합 보안 관리 서비스
+
+    - 여러 AWS 계정의 보안 관리 
+    - 보안 및 규정 준수 검사 자동화 
+    - 보안 및 규정 준수 상태를 보여주는 중앙 집중식 **통합 보안 대시보드** 
+
+- **Amazon Detective**  
+    보안 분석 · 시각화 서비스
+
+    - 보안 문제가 발생한 경로와 영향을 빠르게 파악, 잠재적인 보안 문제와 위협을 조사하고 해결하는 데 도움
+
+- **AWS Compute Optimizer**
+    EC2 인스턴스, EC2 자동 스케일링 그룹, Amazon EBS 볼륨 및 AWS 람다 함수
+
 - **Amazon CloudWatch** ❗️  
-    > `리소스 성능 모니터링`, `이벤트 및 경고`  
+    > `리소스 성능 모니터링`, `이벤트`, `알림`  
 
     AWS 리소스에 대한 지표를 수집하고 추적하는 모니터링 서비스
 
     - 리소스 사용률 및 성능 모니터링
-    - 단일 대시보드에서 지표에 액세스
+    - 단일 대시보드에서 지표에 액세스 ✗
     - AWS Lambda와 Amazon CloudWatch 결합 → 트리거 기반 서버리스 로그 솔루션 구축 
+    - 청구 메트릭 데이터는 미국 동부(노스버지니아) 지역 `us-east-1`에 저장 
 
 - **Amazon CloudWatch Logs**
     > `로그 중앙 집중화`
@@ -247,6 +282,13 @@
         </small>
     - CloudTrail Insights 옵션
         - AWS 계정에서 비정상적인 API 활동 자동 감지
+    - 기본적으로 CloudTrail이 S3 버킷으로 전송하는 로그 파일은 Amazon S3 관리 키(SSE-S3)를 사용한 서버 측 암호화를 사용하여 암호화
+
+- **AWS Audit Manager**
+
+- **AWS Health Dashboard**
+    - Account health
+    - Service health
 
 - **AWS X-Ray**
     > `추석 및 분석`, `디버깅`, `서비스 맵`
@@ -254,7 +296,6 @@
     - 애플리케이션 추적 및 시각적 분석
     - 마이크로서비스 아키텍처(MSA)로 구축된 애플리케이션과 같은 서버리스 및 분산 애플리케이션 분석 및 디버그 가능 
     - 그래프로 시각화가 가능한 API(X-Ray API) 제공 → Service Map 
-
 
 #### 2.3 AWS 액세스 관리 기능 식별
 - **AWS IAM(Identity and Access Management)**  
@@ -275,9 +316,31 @@
             - Other hardware MFA device → 물리적 장치이지만 연결 ✗, 여섯 자리 숫자 코드를 제공하는 MFA 장치
             - ~~SMS text message-based MFA~~ `지원 종료`
 
+    - IAM JSON 정책 요소
+        - Version
+            - 사용할 정책 언어 버전
+            - 모범 사례로 최신 2012-10-17 버전을 사용하는 것이 좋음 
+        - Id 
+            - 정책 식별자 
+        - Statement `필수`
+            - 정책 요소 컨테이너 역할 
+        - Sid
+            - Statement Id
+        - Effect `필수`
+            - 허용(Allow) 또는 거부(Deny) 
+        - Principal / NotPrincipal
+        - Action / NotAction `필수`
+            - 허용하거나 거부하는 작업 목록  
+        - Resource / NotResource
+            - 작업이 적용되는 리소스 목록
+        - Condition
+        - Variables and tags
+        - Supported data types
+
 - **AWS 계정 루트 사용자**
     - 루트 유저 권한 
-        - 계정의 모든 AWS 서비스 및 리소스에 대한 전체 액세스 권한 보유 
+        - 계정의 모든 AWS 서비스 및 리소스에 대한 전체 액세스 권한 보유   
+            → IAM 정책을 사용하여 계정 권한은 제한할 수 없음 
         - <u>일상적인 작업, 관리 작업 용도로 사용으로 사용하지 말 것</u> 
         - Multi-Factor Authentication 활성화, 액세스 키 잠금 권장
     
@@ -331,8 +394,10 @@
             - Serverless, scalable, durable, easy SDK
             - IAM을 활용한 파라미터 엑세스 컨트롤 
         - **SSM Session Manager**  
+            - 대화형 브라우저 기반 셸 및 CLI 환경을 제공하는 완전 관리형 서비
             - EC2 인스턴스나 온프레미스 서버에 시큐어 셸 시작 가능  
             - SSH 액세스, Bastion Host, SSH 키 관리 불필요, SSH 포트(22) 불필요   
+                → 새로운 포트를 열거나 공용 IP 주소를 사용할 필요 ✗
 
 #### 2.4 보안을 위한 구성 요소 및 리소스 파악
 
