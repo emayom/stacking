@@ -1,4 +1,10 @@
-[2023 KAKAO BLIND RECRUITMENT - 개인정보 수집 유효기간](https://school.programmers.co.kr/learn/courses/30/lessons/150370)
+#### TOC
+1. [2023 KAKAO BLIND RECRUITMENT - 개인정보 수집 유효기간](#2023-kakao-blind-recruitment---개인정보-수집-유효기간)
+1. [프로그래머스 - 전화번호 목록](#프로그래머스---전화번호-목록)
+1. [프로그래머스 - 의상](#프로그래머스---의상)
+1. [프로그래머스 - 베스트앨범](#프로그래머스---베스트앨범)
+
+## [2023 KAKAO BLIND RECRUITMENT - 개인정보 수집 유효기간](https://school.programmers.co.kr/learn/courses/30/lessons/150370)
 
 ```js
 function solution(today, terms, privacies) {
@@ -24,7 +30,7 @@ function solution(today, terms, privacies) {
 }
 ```
 
-[프로그래머스 - 전화번호 목록](https://school.programmers.co.kr/learn/courses/30/lessons/42577)
+## [프로그래머스 - 전화번호 목록](https://school.programmers.co.kr/learn/courses/30/lessons/42577)
 
 ```js
 function solution(phone_book) {
@@ -68,7 +74,7 @@ function solution(phone_book) {
 해당 문제의 제한 사항에 따르면 키의 개수는 1 이상 1,000,000 이하이며 개별 키는 1 이상 20 이하의 문자열로 제한되어 있다.  
 값(value) 역시 primitive `boolean` 타입으로 고려하였을 때 메모리 측면에서 큰 부담이 없을 것이라고 판단했다.  
 
-[프로그래머스 - 의상](https://school.programmers.co.kr/learn/courses/30/lessons/42578)
+## [프로그래머스 - 의상](https://school.programmers.co.kr/learn/courses/30/lessons/42578)
 
 ```js
 // 1-1. Map - forEach 
@@ -132,3 +138,67 @@ function solution(clothes) {
 모든 풀이의 `solution` 함수는 유사한 의사 코드를 가졌으며, **해시 테이블**을 통해 의상의 종류를 `key`로 종류별 개수를 카운팅했다. 카운팅 해시 테이블을 구성하는 로직에서 O(n), 총 조합의 수를 구하는 로직에서 O(n)의 시간 복잡도를 가지므로 각 풀이의 시간 복잡도는 최종적으로 O(n) 이 된다.
 
 카운팅 과정에서 해시 테이블의 잦은 갱신 필요하다고 생각하여 Object를 사용하는 접근이 적합할 것이라고 예상하였지만 카운팅하려는 `clothes` 배열의 크기가 작기 때문에 큰 차이를 보이지 않았다. 결과적으로 각 풀이의 성능 차이가 크지 않다. 
+
+
+## [프로그래머스 - 베스트앨범](https://school.programmers.co.kr/learn/courses/30/lessons/42579)
+```js
+// 1. 별도의 Map 객체로 관리 
+function solution(genres, plays) {
+    // 장르별 총 재생 횟수 
+    const playsByGenre = new Map();
+    // 장르별 곡 고유 번호 
+    const songs = new Map();
+    
+    genres.forEach((genre, i)=> {             
+        playsByGenre.set(genre, (playsByGenre.get(genre) || 0) + plays[i]);
+        songs.set(genre, [...(songs.get(genre) || []), i]);
+    });
+
+    return [...playsByGenre.keys()].sort((a,b)=> playsByGenre.get(b) - playsByGenre.get(a))
+                .flatMap((genre)=> songs.get(genre).sort((a,b)=> plays[b] - plays[a]).slice(0,2));
+}
+
+// 2. 하나의 구조체로 관리 
+function Genre() {
+    this.totalPlays = 0;
+    this.songIds = [];
+}
+
+function solution(genres, plays) {
+    const genresMap = new Map();
+    
+    genres.forEach((genre, i) => {
+        if (!genresMap.has(genre)) {
+            genresMap.set(genre, new Genre());
+        }
+        
+        genresMap.get(genre).totalPlays += plays[i];
+        genresMap.get(genre).songIds.push(i);
+    });
+
+    return [...genresMap.keys()].sort((a,b)=> genresMap.get(b).totalPlays - genresMap.get(a).totalPlays)
+                .flatMap((genre)=> genresMap.get(genre).songIds.sort((a,b)=> plays[b] - plays[a]).slice(0,2));
+}
+```
+
+##### Review 
+```
+제한사항
+- genres[i]는 고유번호가 i인 노래의 장르입니다.
+- plays[i]는 고유번호가 i인 노래가 재생된 횟수입니다.
+- genres와 plays의 길이는 같으며, 이는 1 이상 10,000 이하입니다.
+- 장르 종류는 100개 미만입니다.
+- 장르에 속한 곡이 하나라면, 하나의 곡만 선택합니다.
+- 모든 장르는 재생된 횟수가 다릅니다.
+```
+
+첫 번째 풀이에서는 각 데이터에 독립적으로 접근하기 위한 목적으로 장르별로 총 재생 횟수와 고유 번호를 별도의 Map 객체로 명확하게 분리했다.  
+논리적으로 단순하게 느껴질 수 있지만, 입력 값이 크거나 메모리 제한이 있는 환경에서는 비효율적일 수 있다. 또한, 속성이 다양해질 경우 여러 개의 Map 객체를 생성하고 관리하는 방식은 코드 복잡성과 성능 저하를 초래할 수 있다. 문제만 정확하고 빠르게 푸는 것 뿐만 아니라 평소 코드를 확장 가능한 방식으로 작성하는 것 또한 중요하는 생각에 풀이를 수정했다.
+
+이를 보완하기 위해 두 번째 풀이에서는 장르별 총 재생 횟수와 고유 번호를 하나의 객체(`Genre`)로 묶어 캡슐화하여 관리했다. 하나의 구조체로 데이터를 묶음으로써 접근과 관리가 간결해지고, 추후에 속성이 추가되더라도 이를 쉽게 확장할 수 있는 구조가 된다.
+
+모든 풀이는 `forEach`로 순회하며 `genres` 배열을 순회하면서 장르별 총 재생 횟수를 누적하고, 고유 번호를 분류하여 Map에 저장한다.  
+이후 `sort`를 사용하여 장르별로 총 재생 횟수에 따라 내림차순 정렬하는데, 이때 장르 종류는 최대 99개의 장르 배열을 정렬하게 된다.  
+마지막으로 장르별 고유 번호 배열을 재생 횟수 기준으로 내림차순 정렬한 후, 상위 2곡을 추출하여 `flatMap`을 사용해 평탄화한 후 리턴한다. 
+
+`forEach`를 사용하여 해시 맵에 데이터를 저장하는 과정에서 O(n), `sort`를 사용하여 장르별 총 재생 횟수에 따른 정렬에서 O(n log n), 그리고 `flatMap`을 사용하여 각 장르의 곡을 재생 횟수 기준으로 정렬하고 상위 2곡을 추출해 평탄화하는 과정에서 O(n log n)의 시간 복잡도를 가지게 되어 최종적으로 시간 복잡도는 O(n log n)이다. 
