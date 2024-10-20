@@ -1,4 +1,4 @@
-[프로그래머스 - 뒤에 있는 큰 수 찾기](https://school.programmers.co.kr/learn/courses/30/lessons/154539)
+## [프로그래머스 - 뒤에 있는 큰 수 찾기](https://school.programmers.co.kr/learn/courses/30/lessons/154539)
 ```js
 // 이중 for문 O(n²) → 실패(시간 초과) ❌
 function solution(numbers) {
@@ -23,6 +23,7 @@ function solution(numbers) {
 
 // 스택 활용 O(n)
 function solution(numbers) {
+    const stack = [];
     const answer = new Array(numbers.length).fill(-1);
     
     numbers.forEach((current, idx)=> {
@@ -52,3 +53,38 @@ function solution(numbers) {
 ##### 관련 문제 
 - [백준 - 오큰수](https://www.acmicpc.net/problem/17298)
 - [백준 - 히스토그램에서 가장 큰 직사각형](https://www.acmicpc.net/problem/6549)
+
+## [프로그래머스 - 올바른 괄호](https://school.programmers.co.kr/learn/courses/30/lessons/12909)
+
+```js
+function solution(s){
+    if(s.startsWith(")")) return false;
+    
+    const stack = [];
+    
+    for(const c of s){
+        c === '(' ? stack.push(null) : stack.length && stack.pop();
+    }
+    
+    return stack.length === 0;
+}
+```
+
+## [프로그래머스 - 주식가격](https://school.programmers.co.kr/learn/courses/30/lessons/42584)
+```js
+function solution(prices) {
+    const stack = [];
+    const answer = Array.from({ length: prices.length }, (_, i) => prices.length -1 - i);
+    
+    prices.forEach((price, i) => {
+        while(stack.length && prices[stack.at(-1)] > price){
+            const last = stack.pop();
+            answer[last] = i - last;
+        }
+    
+        stack.push(i);
+    })
+    
+    return answer;
+}
+```
