@@ -6,8 +6,7 @@
 
 ## [뒤에 있는 큰 수 찾기](https://school.programmers.co.kr/learn/courses/30/lessons/154539)
 
-<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> 
-<img src="https://img.shields.io/badge/-Stack-lightgray" alt="Stack"/> 
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Stack-lightgray" alt="Stack"/> 
 
 ```js
 // 이중 for문 O(n²) → 실패(시간 초과) ❌
@@ -66,8 +65,7 @@ function solution(numbers) {
 
 ## [올바른 괄호](https://school.programmers.co.kr/learn/courses/30/lessons/12909)
 
-<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> 
-<img src="https://img.shields.io/badge/-Stack-lightgray" alt="Stack"/> 
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Stack-lightgray" alt="Stack"/> 
 
 ```js
 function solution(s){
@@ -85,8 +83,7 @@ function solution(s){
 
 ## [주식가격](https://school.programmers.co.kr/learn/courses/30/lessons/42584)
 
-<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> 
-<img src="https://img.shields.io/badge/-Stack-lightgray" alt="Stack"/> 
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Stack-lightgray" alt="Stack"/> 
 
 ```js
 function solution(prices) {
@@ -108,11 +105,10 @@ function solution(prices) {
 
 ## [다리를 지나는 트럭](https://school.programmers.co.kr/learn/courses/30/lessons/42583)
 
-<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> 
-<img src="https://img.shields.io/badge/-Queue-blue" alt="Queue"/> 
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Queue-blue" alt="Queue"/> 
 
 ```js
-// 배열 기반 큐 모방, shift() 회피 
+// 1. 배열 기반 - shift() 회피 
 function solution(bridge_length, weight, truck_weights) {
     const queue = [];
     
@@ -145,46 +141,94 @@ function solution(bridge_length, weight, truck_weights) {
     }
 }
 
-// 큐(Queue) 자료구조 활용 
+// 2. 선형 큐 자료구조 활용 
+class Node {
+    constructor(value){
+        this.value = value;
+        this.next = null;
+    }
+}
+
 class Queue {
     constructor(size){
-       this.value = new Array(size).fill(0); 
+        this.front = 0;
+        this.rear = 0;
+        this.size = 0;
+    }
+
+    isEmpty(){
+        return !this.front && !this.size;
+    }
+
+    #isEqual(node1, node2){
+        if(!(node1 instanceof Node) || !(node2 instanceof Node)) return false;
+
+        const nodeToString = (object) => Object.entries(object).toString();
+        
+        return nodeToString(node1) === nodeToString(node2);
     }
     
     enqueue(value){
-        this.value.push(value);
+        const node = new Node(value);
+
+        if(this.isEmpty()){
+            this.front = node;
+            this.rear = node;
+        } else {
+            this.rear.next = node;
+            this.rear = node;
+        }
+
+        return ++this.size;
     }
     
     dequeue(){
-        this.value.shift();
+        if(this.isEmpty()) return;
+
+        const { next, value } = this.front;
+
+        if(this.#isEqual(this.front, this.rear)){
+            this.rear = null;
+        }
+
+        this.front = next;
+        this.size--;
+
+        return value;
     }
 }
 
 function solution(bridge_length, weight, truck_weights) {
-    const q = new Queue(bridge_length);
+    const bridge = new Queue();
+
+    let time = 0;
+    let bridge_weights = 0;
     
-    const calcNextWeight = () => q.value.reduce((acc, current, i) => {
-        if(i === 0) return acc;
-        return acc += current;
-    }, 0);
-    
-    
-    return truck_weights.reduce((time, truck) => {   
-        while(calcNextWeight() + truck > weight){
+    truck_weights.forEach(truck => {        
+        while(bridge_weights + truck > weight){
+            if(bridge.size === bridge_length){
+                bridge_weights -= bridge.dequeue();
+                
+                if(bridge_weights + truck <= weight)    
+                    break;
+            }
+            
             time++;
-            q.dequeue();
-            q.enqueue(0);
+            bridge.enqueue(0);
         }
         
         time++;
-        q.dequeue();
-        q.enqueue(truck);
+        bridge.enqueue(truck);   
+        bridge_weights += truck;
         
-        return time;
-    }, 0) + bridge_length;
+        if(bridge.size > bridge_length) 
+            bridge_weights -= bridge.dequeue();
+    });
+    
+    return time + bridge_length;
 }
 
-// 원형 큐(Circular Queue) 자료구조 활용 
+// 3. 원형 큐 자료구조 활용 
 class CircularQueue {    
     constructor(size = 10){
         this.queue = new Array(size+1).fill(0); 
