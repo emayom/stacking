@@ -1,6 +1,8 @@
 #### TOC
 1. [체육복](#체육복)
 1. [조이스틱](#조이스틱)
+1. [큰 수 만들기](#큰-수-만들기)
+1. [구명보트](#구명보트)
 
 ## [체육복](https://school.programmers.co.kr/learn/courses/30/lessons/42862)
 
@@ -116,4 +118,68 @@ function solution(name) {
 제한 사항
 - name은 알파벳 대문자로만 이루어져 있습니다.
 - name의 길이는 1 이상 20 이하입니다.
+```
+
+## [큰 수 만들기](https://school.programmers.co.kr/learn/courses/30/lessons/42883)
+
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Greedy-red" alt="Greedy"/> 
+
+```js
+function solution(number, k) {
+    const stack = [];
+    const idx = [...number].findIndex(current => {
+        if(k === 0) return true;    // 얼리 리턴
+        
+        while(stack.length && stack.at(-1) < current && 0 < k){
+            stack.pop();
+            k--;
+        }
+        
+        stack.push(current);
+    });
+  
+    // 얼리 리턴 되었다면
+    if(idx > -1) return stack.join('') + number.slice(idx);
+    
+    return stack.slice(0, number.length - k).join('');
+}
+```
+
+##### Review 
+
+```
+제한 조건
+- number는 2자리 이상, 1,000,000자리 이하인 숫자입니다.
+- k는 1 이상 number의 자릿수 미만인 자연수입니다.
+```
+
+## [구명보트](https://school.programmers.co.kr/learn/courses/30/lessons/42885)
+
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Greedy-red" alt="Greedy"/> 
+
+```js
+function solution(people, limit) {
+    let cnt = 0;
+    
+    people.sort((a,b)=> b-a);
+
+    for(let i = 0; i < people.length; i++){    
+        if(people[i] < limit && i < people.length-1 && people[i] + people.at(-1) <= limit){
+            people.pop();
+        } 
+        cnt++;
+    }
+    
+    return cnt;
+}
+```
+
+##### Review 
+
+```
+제한사항
+- 무인도에 갇힌 사람은 1명 이상 50,000명 이하입니다.
+- 각 사람의 몸무게는 40kg 이상 240kg 이하입니다.
+- 구명보트의 무게 제한은 40kg 이상 240kg 이하입니다.
+- 구명보트의 무게 제한은 항상 사람들의 몸무게 중 최댓값보다 크게 주어지므로 사람들을 구출할 수 없는 경우는 없습니다.
 ```
