@@ -1,7 +1,10 @@
 #### TOC
-1. [프로그래머스 - 더 맵게](#프로그래머스---더-맵게)
+1. [더 맵게](#더-맵게)
 
-## [프로그래머스 - 더 맵게](https://school.programmers.co.kr/learn/courses/30/lessons/42626)
+## [더 맵게](https://school.programmers.co.kr/learn/courses/30/lessons/42626)
+
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/> <img src="https://img.shields.io/badge/-Heap-rosybrown" alt="Heap"/> 
+
 ```js
 class MinHeap {
     constructor(array){    

@@ -1,10 +1,12 @@
 #### TOC
 1. [2023 KAKAO BLIND RECRUITMENT - 개인정보 수집 유효기간](#2023-kakao-blind-recruitment---개인정보-수집-유효기간)
-1. [프로그래머스 - 전화번호 목록](#프로그래머스---전화번호-목록)
-1. [프로그래머스 - 의상](#프로그래머스---의상)
-1. [프로그래머스 - 베스트앨범](#프로그래머스---베스트앨범)
+1. [전화번호 목록](#전화번호-목록)
+1. [의상](#의상)
+1. [베스트앨범](#베스트앨범)
 
 ## [2023 KAKAO BLIND RECRUITMENT - 개인정보 수집 유효기간](https://school.programmers.co.kr/learn/courses/30/lessons/150370)
+
+<img src="https://img.shields.io/badge/-Level 1-blue" alt="Level 1"/> <img src="https://img.shields.io/badge/-Hash-yellow" alt="Hash"/>
 
 ```js
 function solution(today, terms, privacies) {
@@ -30,7 +32,9 @@ function solution(today, terms, privacies) {
 }
 ```
 
-## [프로그래머스 - 전화번호 목록](https://school.programmers.co.kr/learn/courses/30/lessons/42577)
+## [전화번호 목록](https://school.programmers.co.kr/learn/courses/30/lessons/42577)
+
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/> <img src="https://img.shields.io/badge/-Hash-yellow" alt="Hash"/> 
 
 ```js
 function solution(phone_book) {
@@ -74,7 +78,9 @@ function solution(phone_book) {
 해당 문제의 제한 사항에 따르면 키의 개수는 1 이상 1,000,000 이하이며 개별 키는 1 이상 20 이하의 문자열로 제한되어 있다.  
 값(value) 역시 primitive `boolean` 타입으로 고려하였을 때 메모리 측면에서 큰 부담이 없을 것이라고 판단했다.  
 
-## [프로그래머스 - 의상](https://school.programmers.co.kr/learn/courses/30/lessons/42578)
+## [의상](https://school.programmers.co.kr/learn/courses/30/lessons/42578)
+
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/> <img src="https://img.shields.io/badge/-Hash-yellow" alt="Hash"/> 
 
 ```js
 // 1-1. Map - forEach 
@@ -140,7 +146,10 @@ function solution(clothes) {
 카운팅 과정에서 해시 테이블의 잦은 갱신 필요하다고 생각하여 Object를 사용하는 접근이 적합할 것이라고 예상하였지만 카운팅하려는 `clothes` 배열의 크기가 작기 때문에 큰 차이를 보이지 않았다. 결과적으로 각 풀이의 성능 차이가 크지 않다. 
 
 
-## [프로그래머스 - 베스트앨범](https://school.programmers.co.kr/learn/courses/30/lessons/42579)
+## [베스트앨범](https://school.programmers.co.kr/learn/courses/30/lessons/42579)
+
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 3-orange" alt="Level 3"/> <img src="https://img.shields.io/badge/-Hash-yellow" alt="Hash"/> 
+
 ```js
 // 1. 별도의 Map 객체로 관리 
 function solution(genres, plays) {

@@ -1,4 +1,10 @@
-[프로그래머스 - 가장 큰 수](https://school.programmers.co.kr/learn/courses/30/lessons/42746)
+#### TOC
+1. [가장 큰 수](#가장-큰-수)
+1. [H-Index](#h-index)
+
+## [가장 큰 수](https://school.programmers.co.kr/learn/courses/30/lessons/42746)
+
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/> <img src="https://img.shields.io/badge/-Sorting-darkgreen" alt="Sorting"/> 
 
 ```js
 function solution(numbers) {
@@ -8,7 +14,10 @@ function solution(numbers) {
 }
 ```
 
-[프로그래머스 - H-Index](https://school.programmers.co.kr/learn/courses/30/lessons/42747)
+## [H-Index](https://school.programmers.co.kr/learn/courses/30/lessons/42747)
+
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/> <img src="https://img.shields.io/badge/-Sorting-darkgreen" alt="Sorting"/> 
+
 ```js
 // 1. 오름차순 정렬 O(nlogn)
 function solution(citations) {
@@ -50,8 +59,7 @@ function solution(citations) {
 - 논문별 인용 횟수는 0회 이상 10,000회 이하입니다.
 ```
 
-의사 코드를 작성하기 전에 제한 사항을 먼저 확인했다.   
-제한 사항에 따르면 매개변수 `citations` 배열의 최대 크기는 1,000으로 O(n²)의 시간 복잡도를 가진 알고리즘을 사용해도 시간 초과 없이 문제를 해결할 수 있을 것으로 보였다.  
+의사 코드를 작성하기 전에 제한 사항을 먼저 확인했다. 제한 사항에 따르면 매개변수 `citations` 배열의 최대 크기는 1,000으로 O(n²)의 시간 복잡도를 가진 알고리즘을 사용해도 시간 초과 없이 문제를 해결할 수 있을 것으로 보였다.  
 
 다음으로는 구하고자하는 `H-Index`를 만족하는 조건을 확인했다.   
 어떤 과학자가 발표한 논문 `n`편 중  

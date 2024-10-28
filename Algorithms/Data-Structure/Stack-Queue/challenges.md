@@ -6,7 +6,7 @@
 
 ## [뒤에 있는 큰 수 찾기](https://school.programmers.co.kr/learn/courses/30/lessons/154539)
 
-<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Stack-lightgray" alt="Stack"/> 
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/> <img src="https://img.shields.io/badge/-Stack-lightgray" alt="Stack"/> 
 
 ```js
 // 이중 for문 O(n²) → 실패(시간 초과) ❌
@@ -65,7 +65,7 @@ function solution(numbers) {
 
 ## [올바른 괄호](https://school.programmers.co.kr/learn/courses/30/lessons/12909)
 
-<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Stack-lightgray" alt="Stack"/> 
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/> <img src="https://img.shields.io/badge/-Stack-lightgray" alt="Stack"/> 
 
 ```js
 function solution(s){
@@ -83,7 +83,7 @@ function solution(s){
 
 ## [주식가격](https://school.programmers.co.kr/learn/courses/30/lessons/42584)
 
-<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Stack-lightgray" alt="Stack"/> 
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/> <img src="https://img.shields.io/badge/-Stack-lightgray" alt="Stack"/> 
 
 ```js
 function solution(prices) {
@@ -105,7 +105,7 @@ function solution(prices) {
 
 ## [다리를 지나는 트럭](https://school.programmers.co.kr/learn/courses/30/lessons/42583)
 
-<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Queue-blue" alt="Queue"/> 
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/> <img src="https://img.shields.io/badge/-Queue-blue" alt="Queue"/> 
 
 ```js
 // 1. 배열 기반 - shift() 회피 

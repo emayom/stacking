@@ -6,7 +6,7 @@
 
 ## [체육복](https://school.programmers.co.kr/learn/courses/30/lessons/42862)
 
-<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Greedy-red" alt="Greedy"/> 
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 1-blue" alt="Level 1"/> <img src="https://img.shields.io/badge/-Greedy-red" alt="Greedy"/> 
 
 ```js
 // Set 자료구조 활용
@@ -77,7 +77,7 @@ function solution(n, lost, reserve) {
 
 ## [조이스틱](https://school.programmers.co.kr/learn/courses/30/lessons/42860)
 
-<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Greedy-red" alt="Greedy"/> 
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/>  <img src="https://img.shields.io/badge/-Greedy-red" alt="Greedy"/> 
 
 ```js
 function solution(name) {
@@ -122,7 +122,7 @@ function solution(name) {
 
 ## [큰 수 만들기](https://school.programmers.co.kr/learn/courses/30/lessons/42883)
 
-<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Greedy-red" alt="Greedy"/> 
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/> <img src="https://img.shields.io/badge/-Greedy-red" alt="Greedy"/> 
 
 ```js
 function solution(number, k) {
@@ -155,7 +155,7 @@ function solution(number, k) {
 
 ## [구명보트](https://school.programmers.co.kr/learn/courses/30/lessons/42885)
 
-<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Greedy-red" alt="Greedy"/> 
+<img src="https://img.shields.io/badge/-프로그래머스-1e2a3c" alt="프로그래머스"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/> <img src="https://img.shields.io/badge/-Greedy-red" alt="Greedy"/> 
 
 ```js
 function solution(people, limit) {
