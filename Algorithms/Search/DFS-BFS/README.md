@@ -38,10 +38,7 @@ last_modified_at: 2024-11-04
 DFS는 **스택(Stack)** 자료 구조를 사용하거나 **재귀(Recursion)** 호출을 통해 구현되며, 재귀를 사용한 구현에서는 함수 호출 시마다 현재 함수의 상태가 내부적으로 스택 프레임에 저장되는 특성을 활용한다. 
 
 <details markdown=1>
-<summary markdown='span'>
-
-#### 깊이 우선 탐색(DFS) 구현 - 스택
-</summary>
+<summary markdown='span'><b>깊이 우선 탐색(DFS) 구현 - 스택</b></summary>
 
 - 인접 리스트(adjacent list) 
     ```js
@@ -110,10 +107,7 @@ DFS는 **스택(Stack)** 자료 구조를 사용하거나 **재귀(Recursion)** 
     ```
 </details>
 <details markdown=1>
-<summary markdown='span'>
-
-#### 깊이 우선 탐색(DFS) 구현 - 재귀
-</summary>
+<summary markdown='span'><b>깊이 우선 탐색(DFS) 구현 - 재귀</b></summary>
 
 > 반드시 종료 조건인  베이스 케이스(base case)를 설정해야 하며, 탐색 깊이가 깊어질수록 스택 오버플로우에 유의해야 한다. 
 
@@ -198,10 +192,7 @@ BFS는 **큐(Queue)** 자료 구조를 사용하여 구현되며, 한 레벨의 
 > 레벨 순회는 트리에 맞게 조정된 BFS의 변형(variant)으로도 볼 수 있다.
 
 <details markdown=1>
-<summary markdown='span'>
-
-#### 너비 우선 탐색(BFS) 구현 - 큐
-</summary>
+<summary markdown='span'><b>너비 우선 탐색(BFS) 구현 - 큐</b></summary>
 
 > [큐 클래스 구현 참고](../../Data-Structure/Stack-Queue/queue.md)
 
