@@ -10,10 +10,14 @@ class Node {
 }
 
 class Queue {
-    constructor(size){
+    constructor(value){
         this.front = 0;
         this.rear = 0;
         this.size = 0;
+
+        if(Array.isArray(value) && value.length){
+            value.forEach(this.enqueue, this);
+        }
     }
 
     isEmpty(){
