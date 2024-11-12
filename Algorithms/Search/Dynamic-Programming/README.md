@@ -7,9 +7,18 @@
 특히, **최적화 문제**(조건을 만족하는 여러 해 중 최적의 해를 찾는 문제)에서 완전 탐색이나 DFS/BFS와 같은 방법을 사용할 경우 **불필요한 중복된 연산**이 발생할 수 있는데, 이때 동적 계획법을 사용하면 메모리를 적절히 활용하여 중복 계산을 방지하고, 수행 시간을 크게 단축시켜 문제를 효율적으로 해결할 수 있다.
 
 #### 동적 계획법 특징 
-- 분할정복(Divide and Conquer) + 중복 계산 최소화  
+- 분할 정복(Divide and Conquer) + 재사용 (=중복 계산 최소화)
     - Memoization 방식 
     - Tabulation 방식 
+
+#### 분할 정복, 동적 계획법 간의 비교
+
+| 구분 | 동적 계획법 | 분할 정복 |
+|-----|----------|---------|
+| **하위 문제 간 관계** | 하위 문제들이 서로 **의존적** | 하위 문제들이 서로 **독립적** |
+| **문제 해결 방식**  | 중복된 하위 문제 계산 결과를 저장해 **재사용** | 중복되지 않는 하위 문제를 개별적으로 해결 후 **합침** |
+| **적용 대상** | 하위 문제의 **중복 계산**이 잦고, 이전 결과를 **재사용**할 수 있는 문제 | 독립적인 하위 문제로 분할이 가능한 문제 |
+| **대표적인 예시** | 피보나치 수열, 최단 경로 문제, 배낭 문제 | 병합 정렬, 퀵 정렬, 이진 탐색 |
 
 ## 동적 계획법의 구현
 - 하향식(Top-Down) 접근법
@@ -23,9 +32,9 @@
 ```js
 function fibonacci(n, memo = []) {
     if (n < 2) return memo[n] = n;
-    if (memo[n]) return memo[n]; // ✅ Memoization
+    if (memo[n]) return memo[n];    // ✅ Memoization
     
-    return memo[n] = fibonacci(n-1, memo) + fibonacci(n-2, memo);
+    return memo[n] = fibonacci(n-1, memo) + fibonacci(n-2, memo);   // 재귀적으로 하위 문제로 나누어 해결 
 }
 ```
 
@@ -37,7 +46,7 @@ function fibonacci(n, memo = []) {
 
 ```js
 function fibonacci(n) {
-    const table = new Array(n+1).fill(0);
+    const table = new Array(n+1).fill(0);   // ✅ Tabulation
     
     table[1] = 1;
     
@@ -48,3 +57,23 @@ function fibonacci(n) {
     return table[n];
 }
 ```
+
+## 동적 계획법의 적용 대상
+- 중복되는 부분 문제(Overlapping Subproblem)  
+- 최적 부분 구조(Optimal Substructure)
+
+#### 중복되는 부분 문제(Overlapping Subproblem)
+문제를 해결하는 과정에서 동일한 하위 문제(subproblem)가 반복적으로 나타나는 경우 
+
+- **예시**: 피보나치 수열   
+     > $f(n) = f(n-1) + f(n-2)$
+     
+    <img width="500" alt="image" src="https://github.com/user-attachments/assets/d8aa20ac-6479-4a43-a46e-02465276201b" />
+
+    `f(n)`을 계산하기 위해서는 `f(n-1)`과 `f(n-2)`를 구해야 하는데 `f(n-1)`을 구하는 과정에서 `f(n-2)`를 구하는 부분 문제가 중복되는 것을 확인할 수 있다. 이러한 중복 계산은 `n`이 커질수록 계속해서 더 자주 발생하게 된다. 
+
+
+#### 최적 부분 구조(Optimal Substructure)
+문제에 대한 최적해가 그 하위 문제(subproblem)들의 최적해를 통해 구성될 수 있는 성질  
+
+- **예시**: 피보나치 수열, 최단거리 
