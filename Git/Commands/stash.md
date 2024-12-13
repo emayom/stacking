@@ -1,3 +1,13 @@
+---
+title: git stash
+category: Git
+tags:
+  - Git
+  - Commands
+date: 2024-01-23T00:00:00.000Z
+last_modified_at: '2024-12-13T06:15:18.860Z'
+---
+
 # git stash로 잠깐 치워두기
 > git 커맨드를 잘 활용하면 작업의 효율과 편의성을 높일 수 있다.  
 > 협업이 아니더라도 정말 유용하게 사용한 명령어 `git stash`  

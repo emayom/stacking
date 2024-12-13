@@ -1,5 +1,14 @@
+---
+title: git pull
+category: Git
+tags:
+  - Git
+  - Commands
+date: 2024-02-20T00:00:00.000Z
+last_modified_at: '2024-12-13T06:15:18.860Z'
+---
+
 # git pull 
-이번 글에서는 git pull 명령어가 항상 최선의 선택이 아닐 수 있다는 관점에서 고민을 해 보고자 합니다.
 
 git pull 명령어는 원격 저장소의 변경 사항을 작업 중인 로컬 브랜치로 가져와서 병합하는 편리하고 필수적인 명령어입니다.  
 그러나 git pull 명령어가 하나의 작업 단위가 아닌 페칭(i.e., git fetch)과 병합(i.e., git merge)를 수행하는 두 명령어의 조합이라는 것을 종종 간과합니다.

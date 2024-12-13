@@ -1,3 +1,13 @@
+---
+title: git reset/remote
+category: Git
+tags:
+  - Git
+  - Commands
+date: 2023-11-17T00:00:00.000Z
+last_modified_at: '2024-12-13T06:15:18.860Z'
+---
+
 # :rewind: git 원격 저장소 초기화 
 
 현재 디렉토리의 `.git` 디렉토리 삭제 
