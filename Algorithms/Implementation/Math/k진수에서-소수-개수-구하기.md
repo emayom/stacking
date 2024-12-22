@@ -1,14 +1,18 @@
 ---
-title: "2022 KAKAO BLIND RECRUITMENT - k진수에서 소수 개수 구하기"
-category: "Algorithms"
-tags: ["Algorithms", "Implementation", "String", "2022 KAKAO BLIND RECRUITMENT"]
-date: 2024-11-23
-last_modified_at: 2024-11-23
+title: 2022 KAKAO BLIND RECRUITMENT - k진수에서 소수 개수 구하기
+category: Algorithms
+tags:
+  - Algorithms
+  - Implementation
+  - Math
+  - 2022 KAKAO BLIND RECRUITMENT
+date: 2024-11-23T00:00:00.000Z
+last_modified_at: '2024-12-22T18:51:12.884Z'
 ---
 
 # k진수에서 소수 개수 구하기
 
-<img src="https://img.shields.io/badge/-2022 KAKAO BLIND RECRUITMENT-gold" alt="2022 KAKAO BLIND RECRUITMENT"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/> <img src="https://img.shields.io/badge/-String-dimgray" alt="String"/> 
+<img src="https://img.shields.io/badge/-2022 KAKAO BLIND RECRUITMENT-gold" alt="2022 KAKAO BLIND RECRUITMENT"/> <img src="https://img.shields.io/badge/-Level 2-green" alt="Level 2"/> <img src="https://img.shields.io/badge/-Math-rosybrown" alt="Math"/> 
 
 - [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/92335)
 
