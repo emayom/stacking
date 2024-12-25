@@ -5,7 +5,7 @@ tags:
   - Algorithms
   - Implementation
   - String
-last_modified_at: '2024-12-23T18:55:54.725Z'
+last_modified_at: '2024-12-25T19:32:07.809Z'
 date: '2024-12-23T18:55:54.725Z'
 ---
 
@@ -19,7 +19,7 @@ date: '2024-12-23T18:55:54.725Z'
 
 ```js
 function solution(s) {
-    // \b: 단어의 시작 또는 끝을 나타내는 경계
+    // \b: 단어의 시작 또는 끝을 나타내는 경계(bounds)
     // \w: 알파벳, 숫자, 밑줄 등으로 구성된 단어 문자
     const re = /\b\w/g;
 
@@ -32,7 +32,7 @@ function solution(s) {
 
 ```js
 function solution(s) {
-    // \b: 단어의 시작 또는 끝을 나타내는 경계
+    // \b: 단어의 시작 또는 끝을 나타내는 경계(bounds)
     // \w: 알파벳, 숫자, 밑줄 등으로 구성된 단어 문자
     const re = /\w\b/g;
 
