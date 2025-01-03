@@ -1,7 +1,14 @@
-# 배열(Array)과 연결 리스트(Linked List) 비교
+---
+title: 배열(Array)과 연결 리스트(Linked List)의 비교
+category: Data Structure
+tags:
+  - Data Structure
+date: 2024-01-22T00:00:00.000Z
+last_modified_at: '2025-01-03T06:54:54.419Z'
+---
 
-### 추상 자료형(ADT), 리스트 
-추상 자료형에서 리스트란 유한한 길이의 순서를 가진 항목들을 저장하는 자료 구조를 의미한다.   
+# 배열(Array)과 연결 리스트(Linked List)의 비교
+> 추상 자료형(ADT)에서 리스트란 유한한 길이의 순서를 가진 항목들을 저장하는 자료 구조를 의미한다.   
 
 리스트 ADT를 **배열**을 이용하여 리스트를 구현한 구현체를 배열 리스트(Array List),   
 **연결**을 통해 리스트를 구현한 구현체를 연결 리스트(Linked List)라고 할 수 있다.
