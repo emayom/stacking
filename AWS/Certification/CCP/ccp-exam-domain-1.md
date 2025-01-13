@@ -1,3 +1,7 @@
+---
+last_modified_at: '2025-01-13T15:02:20.474Z'
+date: '2025-01-13T15:02:20.474Z'
+---
 # AWS Certified Cloud Practitioner(CLF-C02) 
 ### Domain 1: Cloud Concepts 🌕🌕🌗🌑🌑
 #### 1.1 AWS 클라우드의 이점 정의

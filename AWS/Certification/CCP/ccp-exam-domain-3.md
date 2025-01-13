@@ -1,3 +1,7 @@
+---
+last_modified_at: '2025-01-13T15:02:20.474Z'
+date: '2025-01-13T15:02:20.474Z'
+---
 # AWS Certified Cloud Practitioner(CLF-C02) 
 ### Domain 3: Cloud Technology and Services 🌕🌕🌕🌘🌑
 #### 3.1 AWS 클라우드에서 배포 및 운영 방법 정의

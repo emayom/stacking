@@ -1,3 +1,7 @@
+---
+last_modified_at: '2025-01-13T15:02:20.474Z'
+date: '2025-01-13T15:02:20.474Z'
+---
 # AWS Certified Cloud Practitioner(CLF-C02) 
 ### Domain 1: Cloud Concepts 🌕🌕🌗🌑🌑
 
@@ -75,7 +79,9 @@
         - 24/7 DRT(DDoS Response Team)
         - 피해 완화 크레딧
 
-    - 대상 리소스: Amazon CloudFront, Amazon Route 53, AWS Global Accelerator, Amazon EC2, Elastic Load Balancing(ELB)
+    <details markdown=1><summary markdown='span'>대상 리소스</summary>
+        Amazon CloudFront, Amazon Route 53, AWS Global Accelerator, Amazon EC2, Elastic Load Balancing(ELB)
+    </details>
 
 - AWS WAF(Web Application Firewall) `Layer 7(HTTP(S))`, `웹 취약점 보호`
     - Web ACL(Access Control List)

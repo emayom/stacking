@@ -1,3 +1,7 @@
+---
+last_modified_at: '2025-01-13T15:02:20.474Z'
+date: '2025-01-13T15:02:20.474Z'
+---
 # AWS Certified Cloud Practitioner(CLF-C02) 
 ### Domain 2: Security and Compliance 🌕🌕🌕🌑🌑
 #### 2.1 AWS 공동 책임 모델(Shared Responsibility Model) 정의 ❗️

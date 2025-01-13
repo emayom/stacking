@@ -1,3 +1,7 @@
+---
+last_modified_at: '2025-01-13T15:02:20.474Z'
+date: '2025-01-13T15:02:20.474Z'
+---
 # AWS Certified Cloud Practitioner(CLF-C02) 
 ### Domain 4: Billing, Pricing, and Support 🌕🌘🌑🌑🌑
 #### 4.1 AWS 요금 모델 비교
