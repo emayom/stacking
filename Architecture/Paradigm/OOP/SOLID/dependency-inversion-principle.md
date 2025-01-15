@@ -1,3 +1,7 @@
+---
+last_modified_at: '2025-01-15T05:35:36.912Z'
+date: '2025-01-15T05:35:36.912Z'
+---
 # 의존관계 역전 원칙(Dependency Inversion Principle, DIP)과 추상화
 ##### Table of Contents
 - [의존관계 역전 원칙](#의존관계-역전-원칙)  

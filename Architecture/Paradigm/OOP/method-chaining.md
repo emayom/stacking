@@ -1,3 +1,7 @@
+---
+last_modified_at: '2025-01-15T05:35:36.912Z'
+date: '2025-01-15T05:35:36.912Z'
+---
 # 매서드 체이닝(Method Chaining)의 득과실
 ##### Table of Contents
 - [매서드 체이닝(Method Chaining)이란?](#🔗-매서드-체이닝method-chaining이란)  
