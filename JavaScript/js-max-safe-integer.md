@@ -5,7 +5,7 @@ tags:
   - JavaScript
   - max safe integer
 date: '2024-02-06T18:16:10.000Z'
-last_modified_at: '2025-01-20T16:13:43.089Z'
+last_modified_at: '2025-01-20T16:20:31.999Z'
 ---
 
 # 자바스크립트에서 안전한 최대 정수 값은 얼마일까?

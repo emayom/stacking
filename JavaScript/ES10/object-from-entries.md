@@ -1,3 +1,7 @@
+---
+last_modified_at: '2025-01-20T16:20:31.999Z'
+date: '2025-01-20T16:20:31.999Z'
+---
 <img src="https://img.shields.io/badge/ES10-F7DF1E?style=for-the-badge&logoColor=#1f2328"> 
 
 # Object.fromEntries() 
