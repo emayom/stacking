@@ -1,10 +1,25 @@
 ---
-last_modified_at: '2025-01-13T15:02:20.474Z'
+last_modified_at: '2025-03-14T07:36:59.737Z'
 date: '2025-01-13T15:02:20.474Z'
 ---
 # AWS Certified Cloud Practitioner(CLF-C02) 
-### Domain 1: Cloud Concepts 🌕🌕🌗🌑🌑
+> [AWS Certified Cloud Practitioner(CLF-C02) 시험 안내서](https://d1.awsstatic.com/ko_KR/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf)
 
+| Domain No. | Content Domain | Weighting |
+|------------|----------------|-----------|
+| Domain 1 | Cloud Concepts| 24% |
+| Domain 2 | Security and Compliance| 30% |
+| Domain 3 | Cloud Technology and Services | 34% |
+| Domain 4 | Billing, Pricing, and Support | 12% |
+
+#### TOC 
+
+- [Domain 1: Cloud Concepts](#domain-1-cloud-concepts)
+- [Domain 2: Security and Compliance](#domain-2-security-and-compliance)
+- [Domain 3: Cloud Technology and Services](#domain-3-cloud-technology-and-services)
+- [Domain 4: Billing, Pricing, and Support](#domain-4-billing-pricing-and-support)
+
+## Domain 1: Cloud Concepts
 #### 클라우드 컴퓨팅 유형  
 - **IaaS**: Amazon EC2, Amazon S3, Amazon VPC
 - **PaaS**: AWS Elastic Beanstalk, AWS Lambda, Amazon RDS
@@ -58,8 +73,7 @@ date: '2025-01-13T15:02:20.474Z'
 1. AWS DataSync
 1. AWS CloudEndure Migration
 
-### Domain 2: Security and Compliance 🌕🌕🌕🌑🌑
-
+## Domain 2: Security and Compliance
 #### AWS 공동 책임 모델(Shared Responsibility Model)
 - **AWS의 책임**: 클라우드 "**자체**"의 보안(Security "of" the Cloud)
 - **고객의 책임**: 클라우드 "**내부**"의 보안(Security "in" the Cloud)
@@ -157,8 +171,7 @@ date: '2025-01-13T15:02:20.474Z'
     - Account health `특정 AWS 계정과 관련된 이벤트 및 상태`
     - Service health `전체 서비스 상태`, `전반적인 운영 상태`
 
-### Domain 3: Cloud Technology and Services 🌕🌕🌕🌘🌑
-
+## Domain 3: Cloud Technology and Services
 #### 글로벌 범위의 AWS 서비스 
 - AWS Identity and Access Management(AWS IAM)
 - Amazon CloudFront
@@ -339,8 +352,7 @@ date: '2025-01-13T15:02:20.474Z'
 - AWS Glue `ETL(Extract, Transform, Load)`
 - Amazon Quicksight `데이터 시각화`, `대시보드`
 
-### Domain 4: Billing, Pricing, and Support 🌕🌘🌑🌑🌑
-
+## Domain 4: Billing, Pricing, and Support
 #### Amazon EC2 결제 및 구매 옵션
 - On-Demand Instances `최소 1분 요금`
 - Savings Plans `기간 & 사용량 약정`, `최대 72% 할인`

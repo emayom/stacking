@@ -1,10 +1,25 @@
 ---
-last_modified_at: '2025-02-24T12:26:41.095Z'
+last_modified_at: '2025-03-14T07:36:59.737Z'
 date: '2025-01-13T15:02:20.474Z'
 ---
 # AWS Certified Cloud Practitioner(CLF-C02) 
 ### Domain 2: Security and Compliance 🌕🌕🌕🌑🌑
-#### 2.1 AWS 공동 책임 모델(Shared Responsibility Model) 정의 ❗️
+
+#### TOC 
+- [2.1 AWS 공동 책임 모델(Shared Responsibility Model) 정의](#21-aws-공동-책임-모델shared-responsibility-model-정의)
+
+- [2.2 AWS 클라우드 보안, 거버넌스 및 규정 준수(Compliance) 개념 이해](#22-aws-클라우드-보안-거버넌스-및-규정-준수compliance-개념-이해)
+
+- [2.3 AWS 액세스 관리 기능 식별](#23-aws-액세스-관리-기능-식별)
+
+- [2.4 보안을 위한 구성 요소 및 리소스 파악](#24-보안을-위한-구성-요소-및-리소스-파악)
+
+#### 2.1 AWS 공동 책임 모델(Shared Responsibility Model) 정의
+---
+#### Knowledge of:
+- AWS 공동 책임 모델
+---
+
 ![image](https://github.com/user-attachments/assets/f2c624ab-8452-4061-a3f4-3240ee1a2c81)
 
 - **AWS 책임**   
@@ -81,6 +96,13 @@ date: '2025-01-13T15:02:20.474Z'
             - 클라이언트 측 데이터 암호화 
 
 #### 2.2 AWS 클라우드 보안, 거버넌스 및 규정 준수(Compliance) 개념 이해
+---
+#### Knowledge of:
+- AWS 규정 준수 및 거버넌스 개념
+- 클라우드 보안 이점
+    - 암호화 
+---
+
 - **AWS Shield** ❗️   
     > `DDos 공격으로부터 보호`  
 
@@ -302,6 +324,14 @@ date: '2025-01-13T15:02:20.474Z'
     - 그래프로 시각화가 가능한 API(X-Ray API) 제공 → Service Map 
 
 #### 2.3 AWS 액세스 관리 기능 식별
+---
+#### Knowledge of:
+- 최소 권한 원칙(Principle of Least Privilege)  
+    - 그 어떠한 사용자도 필요한 것 이상으로 권한을 가지고 있어서는 안 됨  
+        → 주기적으로 권한을 검사하여 미사용 권한을 삭제해주는 작업 필요 
+
+---
+
 - **AWS IAM(Identity and Access Management)**  
     AWS 서비스와 리소스에 대한 액세스를 안전하게 제어/관리할 수 있는 서비스   
     → 보안 요구 사항에 따라 액세스 권한 구성 가능 
@@ -359,10 +389,6 @@ date: '2025-01-13T15:02:20.474Z'
         - invalid VPC ID 나 VPC endpoint ID를 포함한 Amazon S3 버킷 정책(policy) 편집 및 삭제
         - GovCloud 가입 
 
-- **최소 권한 원칙(Principle of Least Privilege)**  
-    - 그 어떠한 사용자도 필요한 것 이상으로 권한을 가지고 있어서는 안 됨 
-    - 주기적으로 권한을 검사하여 미사용 권한을 삭제해주는 작업 필요 
-
 - **AWS IAM Identity Center(AWS Single Sign-On)**  
     > `AWS Single Sign-On 후속 서비스`  
 
@@ -404,6 +430,9 @@ date: '2025-01-13T15:02:20.474Z'
                 → 새로운 포트를 열거나 공용 IP 주소를 사용할 필요 ✗
 
 #### 2.4 보안을 위한 구성 요소 및 리소스 파악
+---
+#### Knowledge of:
+---
 
 - **AWS Trusted Advisor**  ❗️  
     > `모니터링 및 분석`
