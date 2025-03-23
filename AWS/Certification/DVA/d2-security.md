@@ -1,5 +1,11 @@
 ---
-last_modified_at: '2025-03-16T15:17:06.201Z'
+title: AWS Certified Developer - Associate (DVA-C02) 도메인 2
+category: AWS
+tags:
+  - AWS
+  - AWS Certified Developer - Associate
+  - DVA-C02
+last_modified_at: '2025-03-23T16:08:13.481Z'
 date: '2025-03-16T15:17:06.201Z'
 ---
 # AWS Certified Developer - Associate (DVA-C02) 
@@ -23,12 +29,15 @@ date: '2025-03-16T15:17:06.201Z'
 
 - [2.3 애플리케이션 코드에서 민감한 데이터를 관리합니다.](#23-애플리케이션-코드에서-민감한-데이터를-관리합니다)
     - [AWS Secrets Manager](#aws-secrets-manager)
-    - [AWS Systems Manager Parameter Store](#aws-systems-manager-parameter-store)
+    - [AWS SSM Parameter Store](#aws-systems-manager-parameter-storeaws-ssm-parameter-store)
     - [AWS Nitro Enclaves](#aws-nitro-enclaves)
 
 ## 2.1 애플리케이션 및 AWS 서비스에 대한 인증 또는 권한 부여를 구현합니다.
 ---
-#### Knowledge of:
+<details>
+<summary>  
+    <b>Knowledge of:</b>
+</summary>
 
 - 최소 권한 원칙(Principle of Least Privilege) 
     - 그 어떠한 사용자도 필요한 것 이상으로 권한을 가지고 있어서는 안 된다.  
@@ -68,6 +77,8 @@ date: '2025-03-16T15:17:06.201Z'
     - 커스터마이징 가능 여부
     - 업데이트 관리 
     - 사용 계정 범위
+</details>
+
 ---
 
 ### AWS Identity and Access Management(IAM)
@@ -325,6 +336,11 @@ date: '2025-03-16T15:17:06.201Z'
 
 ## 2.2 AWS 서비스를 사용하여 암호화를 구현합니다.
 ---
+<details>
+<summary>  
+    <b>Knowledge of:</b>
+</summary>
+
 - AWS 암호화 스택
     - 물리 계층: 보안 시설 및 AES-256 기반 광학적 암호화
     - 데이터 링크 계층: MACsec 기반 AES-256(IEEE)
@@ -335,7 +351,7 @@ date: '2025-03-16T15:17:06.201Z'
 - 암호화 유형 
     - **전송 중 암호화(Encryption in Transit)**
         - 데이터가 네트워크를 통해 전송될 때 암호화 
-        - HTTPS(SSL/TLS)
+        - **HTTPS(SSL/TLS)** 필요 
 
     - **저장 중 암호화(Encryption at Rest)** → 데이터 스토리지 서비스(S3, EFS)
         - 서버 측 암호화(Server-Side Encryption, SSE)
@@ -387,6 +403,8 @@ date: '2025-03-16T15:17:06.201Z'
     - 키 교체(Key Rotation)
     - 키 격리(Key Isolation)
     - 키 폐기(Key Deletion)
+</details>
+
 ---
 
 ### 봉투 암호화(Evelope Encryption)
@@ -427,7 +445,6 @@ date: '2025-03-16T15:17:06.201Z'
 - 중앙 집중식 키 관리 → 단일 제어 지점(Single Point of Control)
 - 높은 보안성 → FIPS 140-2 인증을 받은 HSM에 키 저장 및 보호
 - 자동 키 로테이션(Automatic Key Rotation) 및 수명 주기 관리 
-    - 고객 관리형 키(CMK)는 기본적으로 자동 키 로테이션이 비활성화되어 있음. (활성화 필요)
 - AWS CloudTrail과 통합, API 요청 로깅을 통해 보안 감사 및 규정 준수 지원
 - 대부분의 AWS의 서비스와 통합 (Amazon S3, EBS, RDS, Redshift, Lambda, CloudTrail 등)
     - S3 버킷이 SSE-KMS(AWS KMS 관리형 키)를 사용한 암호화를 설정하면, 객체를 저장하거나 검색할 때 AWS KMS 키에 대한 별도 권한이 필요
@@ -443,6 +460,7 @@ date: '2025-03-16T15:17:06.201Z'
 
 - 고객 관리형 키(Customer Managed Key)
     - 사용자가 직접 생성, 관리, 정책 설정
+    - 고객 관리형 키(CMK)는 기본적으로 자동 키 로테이션이 비활성화되어 있음. (활성화 필요) 
     - 비용: $1 / month
 
 #### 암호화 및 복호화 관련 KMS API
@@ -536,7 +554,11 @@ date: '2025-03-16T15:17:06.201Z'
 
 ## 2.3 애플리케이션 코드에서 민감한 데이터를 관리합니다.
 ---
-#### Knowledge of:
+<details>
+<summary>  
+    <b>Knowledge of:</b>
+</summary>
+
 - 데이터 분류 
     - 중요도와 민감도를 기준으로 네트워크의 데이터를 식별하고 분류하는 프로세스
     - [[참고] 데이터 분류 모델 및 체계](https://docs.aws.amazon.com/whitepapers/latest/data-classification/data-classification-models-and-schemes.html)
@@ -552,6 +574,8 @@ date: '2025-03-16T15:17:06.201Z'
     - 금융정보: 계좌 번호, 신용 카드 번호 등
     - 개인건강정보(PHI): 미국의 개인 건강 정보 및 특정 국가의 의료 관련 정보 
     - 개인식별정보(PII): 여권 번호, 운전면허 번호, 전화 번호, HTTP 쿠키 등
+</details>
+
 --- 
 
 ### AWS Secrets Manager  
@@ -578,9 +602,14 @@ date: '2025-03-16T15:17:06.201Z'
 - 사용 사례 
     - 사용자 지정 Lambda 함수를 활용한 Amazon RDS 비밀번호 관리 자동화
 
-### AWS Systems Manager Parameter Store
+### AWS Systems Manager Parameter Store(AWS SSM Parameter Store)
 - <u>애플리케이션의 환경 변수나 애플리케이션 설정값과 같은 구성 데이터</u>를 저장하는 서버리스 서비스 
 - **리전 내 여러 가용 영역(AZ)** 에서 호스팅되기 때문에 파라미터를 안정적으로 저장 
+
+- 파라미터 유형
+    - 문자열(String)
+    - 문자열 목록(String List)
+    - 보안 문자열(Secure String) → KMS 암호화 
 
 - 주요 기능
     - AWS KMS를 통한 **선택적** 암호화
