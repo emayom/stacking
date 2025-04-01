@@ -1,9 +1,9 @@
 ---
-last_modified_at: '2025-03-29T17:29:41.646Z'
+last_modified_at: '2025-04-01T06:17:09.848Z'
 date: '2025-03-29T17:29:41.646Z'
 ---
 # AWS Certified Developer - Associate (DVA-C02) 
-## Domain 1: Development with AWS Services 
+## Domain 1:  
 
 #### TOC
 - [1.1 AWS에서 호스팅되는 애플리케이션의 코드를 개발합니다.](#11-aws에서-호스팅되는-애플리케이션의-코드를-개발합니다)
@@ -17,6 +17,8 @@ date: '2025-03-29T17:29:41.646Z'
     
 - [1.2 AWS Lambda용 코드를 개발합니다.](#12-aws-lambda용-코드를-개발합니다)
     - [AWS Lambda](#aws-lambda)
+    - [Integration with AWS Lambda](#integration-with-aws-lambda)
+    - [Lambda@Edge]()
 
 - [1.3 애플리케이션 개발 시 데이터 스토어를 사용합니다.](#13-애플리케이션-개발-시-데이터-스토어를-사용합니다)
     - AWS 기반 스토리지 
@@ -721,9 +723,11 @@ date: '2025-03-29T17:29:41.646Z'
 #### API Gateway 보안 
 - User Authentication through
     - IAM 역할 
-    - Cognito
+        - Signature v4
+    - Cognito User Pool
         - 모바일 애플리케이션, 웹 애플리케이션 등 외부 사용자 
     - Custom Authorizer
+        - 3rd party tokens
 
 - Custom Domain Name HTTPS
 
@@ -793,72 +797,223 @@ date: '2025-03-29T17:29:41.646Z'
     - Fargate
 
 ### AWS Lambda
-    
-- 서버리스 컴퓨팅
-- Virtual functions
-- 이벤트 기반 실행(Event-Driven)  
-    반응형 서비스 → 특정 시기에만 실행하는 경우 적합 
-- 전체 AWS 서비스와 쉽게 통합, CloudWatch를 통한 모니터링 
-- 함수당 최대 10GB RAM 프로비저닝 가능
-    - RAM 확장 시, CPU와 네트워크 품질 및 성능도 향상
-- AWS Lambda 한도 
-    - 지역별 
-        - 실행:
-            - 메모리: 128MB ~ 10,240MB(1MB 단위)
-            - 실행 시간: 기본값은 3초 ~ 900초(1초 단위)
-            - 환경 변수: 
+- 인프라를 프로비저닝하거나 관리하지 않고도 코드를 실행할 수 있는 서버리스 컴퓨팅 서비스
+    - 이벤트에 대한 응답으로 코드를 실행 = **온디맨드 실행** 
+    - 함수당 최대 10GB(10,240MB)까지 RAM 프로비저닝 가능
+- 다른 AWS 서비스와 쉽게 통합, CloudWatch를 통한 로그 모니터링 가능 
+- 함수 버저닝 및 별칭(Alias) 기능 지원
+    - **`$LATEST`(가장 최근에 배포된 함수)를 제외한 각 버전은 불변(immutable)**
+    - `$LATEST`가 기존 버전과 동일할 경우, 새로운 버전으로 생성 불가 
+    - 특정 Lambda 함수 버전를 참조하는 별칭(Alias)을 생성 가능 
+        - <u>Alias는 다른 Alias를 참조할 수 없음</u>
+    - Weighted Alias는 
+- 다양한 언어 지원 
+    - 공식 지원 언어 
+        - Java, Go, PowerShell, Node.js, C#, Python 및 Ruby
+    - 커스텀 런타임(Custom Runtime)
+        - 공식 지원하지 않는 언어나 라이브러리를 포함한 커스텀 실행 환경이 필요할 경우  
+            1. Lambda Runtime API을 사용하여 직접 커스텀 런타임 환경을 구축
+            1. Lambda Container Image를 사용하여 Docker 컨테이너 이미지를 기반으로 커스텀 런타임 환경을 구축
 
-- AWS Lambda 언어 지원 
-    > ZIP 패키지(.zip) 형식으로 배포할 경우, 50MB 제한  
-    > 컨테이너 이미지는 최대 10GB까지 가능
+#### 요금(Pricing)
+- 호출 횟수와 컴퓨팅 시간에 따라 비용 결정, Free Tier 제공 
+    - 호출(Requests)
+        - 월 100만건 요청 무료, 추가 요청 100만 건당 $0.2x ($0.0000002 / request)
+    - 지속 시간(Duration)
+        - 월 40만 GB-초 컴퓨팅 시간 무료, 추가 GB-초당 청구 (리전별 비용 상이) 
 
-    - Node.js(JavaScript)
-    - Python
-    - Java
-    - C3(.NET Core) / Powershell
-    - Ruby
-    - Custom Runtime API(community supported, example Rust or Golang)
+#### 할당량 (리전별 적용)
+- **메모리 할당**: 128MB ~ 10,240MB (1MB 단위)
+    - 구성된 메모리에 비례하여 vCPU가 함수에 할당 (네트워크 품질 및 성능도 향상)
+- **제한 시간**: 기본 3s, 최대 900s(15m) 
+    - 15분 이상의 실행 시간이 필요할 경우 다른 서비스(e.g. Fargate, ECS, EC2) 사용
+- **환경 변수**: 최대 4KB
+- **리소스 기반 정책**: 20KB
+- **임시 스토리지(/tmp)**: 512MB ~ 10,240MB (1MB 단위)
+- **동시 실행(concurrency executions)**: 최대 1,000건
+- **배포 패키지 크기** 
+    - ZIP 파일(.zip): 최대 50MB (압축되지 않으면 250MB)
+    - 컨테이너 이미지: 최대 10GB
 
-    - Lambda Container Image
-        - AWS Lambda 실행 환경 커스텀이 필요할 경우, Lambda Runtime API을 사용하여 사용자 정의 런타임(Custom Runtime)을 개발하고 실행해야 함.
-            - 특정한 라이브러리나 의존성을 포함한 커스텀 실행 환경이 필요할 경우
+#### Lambda 함수를 AWS 외부에 노출하는 방법 (HTTP Endpoints)
+1. **API Gateway**
+    - 쓰로틀링, 요청 유효성 검사, 사용자 지정 권한 부여, 리소스 정책 등 다양한 기능 제공 
+    - 다양한 인증 방식 및 고급 보안 기능 제공 
+    - 추가 비용 발생 
+1. **Function URL** (2022.04 ~ 공식 지원)
+    ```sh
+    # 고유한 URL 엔드포인트
+    https://<url-id>.lambda-url.<region>.on.aws
+    ```
 
-- Lambda 통합 
-    - API Gateway
-        - REST API 생성, Lambda 함수 호출 
-    - Kinesis
-        - Lambda를 사용, 실시간으로 데이터 변환을 수행 
-    - DynamoDB
-        - 데이터베이스의 변경, Lambda 함수 트리거 
-    - S3
-        - 실시간 썸네일 생성
-    - CloudFront
-    - CloudWatch Events EventBridge
-    - CloudWatch Logs
-    - SNS
-    - SQS
-    - Cognito
+    - HTTPS 엔드포인트에서 Lambda 함수 호출을 지원 (IPv4 및 IPv6)
+        - Enable function URL / Create function URL 필요
+        - API Gateway의 Lambda proxy integration처럼 동작  
+        - 리소스 기반 정책 & CORS 구성 지원 
+        - AWS IAM 인증 방식만을 제공
+        - Lambda 호출 비용 이외의 추가 비용 발생 ❌
+        - Private 액세스 지원 ❌
+        - 일부 리전에서는 Function URL 지원 ❌
 
-- Lambda 가격 정책 
-    > 호출 횟수와 컴퓨팅 시간에 따라 비용 결정, Free tier 제공 
+#### Lambda 함수에 전달되는 입력 데이터 (Argument)
+```js
+exports.handler = async (event, context) => {
+    // ...
+};
+```
 
-    - 호출당(calls)
-        - 최초 100만건 요청 무료, 추가 100만건의 요청당 $0.20 ($0.0000002 / request)
-    - 지속 시간당(duration)
-        - 40만GB초 컴퓨팅 시간 무료 
+- 이벤트(Event) 객체 
+    - Lambda 함수에 전달되는 input 데이터
+    - 함수가 처리할 이벤트 데이터가 포함된 JSON 객체
+    - `event`는 런타임에 따라서 다른 객체로 변환 (e.g. python → dict type)
+    - 예시 
+        - API Gateway를 통해 호출된 HTTP 요청 정보
+        - S3 버킷에 업로드 된 객체의 정보 
+        - DynamoDB Streams 이벤트 
 
-- 호출 
-    - 동기식 호출(Synchronous Invocation)
-        - CLI, SDK, API Gateway, ALB 사용 시 
-        - 에러 핸들링은 클라이언트 사이드에서 해결(재시도(retry), 지수 백오프(exponential backoff) 등)
+- 컨텍스트(Context) 객체
+    - Lambda 함수의 메타데이터(metadata)
+        - 공통 속성 (Node.js 기준)
+            > 일부 속성은 특정 언어나 런타임 환경에 의존하여 다르게 제공될 수 있다.
 
-    - 비동기식 호출(Asynchronous Invocation)
-        - S3, SNS, CloudWatch Events 
-        - 람다 함수는 멱등적이어야한다.
+            - `functionName` → Lambda 함수의 이름
+            - `functionVersion` → 함수의 버전
+            - `invokedFunctionArn` → 호출된 Lambda 함수의 ARN
+            - `memoryLimitInMB` → 함수에 할당된 메모리의 양 
+            - `awsRequestId` → 호출 요청 식별자
+            - `logGroupName` → 함수에 대한 로그 그룹
+            - `logStreamName` → 함수 인스턴스에 대한 로그 스트림
 
-- Lambda 이벤트 소스 매핑 (Event Source Mapping)
-    - Streams
-    - Queue
+#### Lambda Destination
+- 비동기식 호출(Asynchronous Invocation)
+    - **실패하거나 성공했을 때, 이벤트를 다른 서비스(destination)로 전달** 
+        - 특정 서비스로 실행 결과(`OnFailure`, `OnSuccess` 이벤트)를 전달하여 추가적인 처리를 수행할 수 있도록
+        - DLQ와 유사한 동작 → DLQ 대신 destination의 사용을 권장 
+
+- 스트림 호출(Stream Invocation) = 이벤트 소스 매핑(Event Source Mapping)
+    - **실패한 이벤트만** 다른 서비스(destination)로 전달
+
+- Destination type 
+    - Amazon SQS
+    - Amazon SNS
+    - Amazon EventBridge
+    - AWS Lambda
+
+#### Lambda Layers
+- 핵심 함수 로직을 종속 항목과 분리  
+    - **배포 패키지 크기 최소화 및 배포 시간 단축**
+    - 자주 변경되는 함수 코드와 자주 변경되지 않는 외부 종속성을 분리 → 독립적으로 관리 
+    - 여러 함수가 공유하는 코드 및 데이터를 중앙에서 관리 → 참조를 통해 재사용 
+- 함수당 최대 5개의 Layer 추가 가능 
+    - 함수의 소스 코드 + Layers 크기 <= 250MB
+- 버전 관리 지원
+- 유형 
+    - **AWS layers** → AWS에서 공식적으로 제공하는 Layer 
+        - 예시 
+            - `AWS SDK for JavaScript`
+            - `AWS X-Ray SDK for Node.js` 
+    - **Custom layers** → 사용자가 직접 Layer를 생성
+        - Custom Runtimes이 필요한 경우 (e.g. Rust, C++ 등 공식 지원되지 않는 언어 실행)
+        - 종속성(dependencies)을 재사용 가능한 형태로 externalize
+    - **Specify an ARN** → 이미 생성되거나 공유된 Layer의 ARN을 직접 입력하여 사용
+
+### Integration with AWS Lambda 
+#### AWS Lambda 호출 방식(AWS Lambda Invocation Types)
+- **동기식(Synchronous)** = Push Model
+    - 클라이언트가 Lambda 함수의 실행을 끝날 때까지 대기, 응답을 반환 = API 응답이 필요한 경우
+        - <u>클라이언트 사이드에서 에러 핸들링</u>
+            - 재시도(retry), 지수 백오프(exponential backoff) 등
+    - 주요 서비스
+        - Elastic Load Balancing (ALB)
+        - Amazon API Gateway
+        - Amazon Cognito
+        - Amazon CloudFront (Lambda@Edge)
+        - AWS CLI
+        - AWS SDK
+        - AWS Step Functions
+
+- **비동기식(Asynchronous)** = Event Model
+    - Lambda 함수는 호출 후 즉시 반환, 백그라운드에서 처리 = 응답을 기다리지 않음 
+        - <u>자동 재시도(최대 2회) 및 에러 핸들링 수행</u>
+            - 실행되는 Lambda 함수는 **멱등적**이어야한다. 
+    - 주요 서비스 
+        - Amazon S3 
+        - Amazon SNS 
+        - Amazon SES
+        - Amazon CloudWatch Logs 
+        - Amazon CloudWatch Events 
+        - AWS CloudFormation
+        - AWS CodeCommit
+        - AWS Config
+
+- **이벤트 소스 매핑(Event Source Mapping)** = Poll-Based
+    - <u>Lambda가</u> 지속적으로 폴링(polling)하여 새로운 데이터를 감지 → Lambda 함수로 전달 
+    - 자동 재시도 & Dead Letter Queue(DLQ) 가능
+        - Lambda DLQ의 경우 비동기식 호출에만 작동 
+    - Stream (Kinesis, DynamoDB Streams)
+        - 샤드(shard) 레벨에서 아이템을 순차적으로 처리 
+            - 읽기 시작 위치 지정 가능 
+            - 에러 핸들링
+                - 배치(batch)에 오류 발생 시 처리 중단 (to ensure in-order processing)
+    - Queue (SQS & SQS FIFO)
+        - Short Polling (default)
+        - Long Polling
+            - 대기열이 비어있을 경우, 일정 시간 대기 후 반환 (1s~20s)  
+                → 불필요한 CPU 연산 및 API 호출 방지 
+
+    - 주요 서비스 
+        - Amazon DocumentDB
+        - Amazon DynamoDB
+        - Amazon Kinesis
+        - Amazon MQ
+        - Amazon Managed Streaming for Apache Kafka (Amazon MSK)
+        - Amazon SQS
+
+#### ALB
+- 동기식 호출 
+- HTTP/HTTPS 환경에서 직접 Lambda 함수 호출 
+    - Lambda 함수를 target group에 등록 필요 
+    - ALB ↔︎ Lambda 함수 호출 → HTTP ↔︎ JSON으로 translate
+    - 다중 헤더(Multi-Header) 값은 배열으로 
+
+#### Amazon API Gateway
+- 동기식 호출 
+- REST API 생성, HTTP/HTTPS 환경에서 직접 Lambda 함수 호출 
+- 프록시 통합 (Proxy Integration)
+- 비 프록시 통합 (Non-Proxy Integration)
+
+#### Kinesis
+- 이벤트 소스 매핑
+- Lambda를 사용, 실시간으로 데이터 변환을 수행 
+
+#### Amazon DynamoDB
+- 이벤트 소스 매핑
+- 데이터베이스의 변경
+
+#### Amazon S3
+- 비동기식 호출 
+- **S3 버킷에서 발생하는 이벤트(S3 Event Notification)** 를 감지하여 이를 Lambda 함수로 전송
+    - <u>버킷 버저닝 활성화 권장</u>
+        - 버전이 지정되지 않은 단일 객체에 동시에 두 개의 쓰기가 수행되는 경우 단일 이벤트 알림만 전송될 수 있다.
+    - 특정 파일 유형이나 이름 패턴에 따라 이벤트를 필터링 가능 (prefix, suffix)
+    - 예시
+        - 파일 업로드 후 자동 리사이징
+        - 실시간 썸네일 생성 
+        - Metadata Sync
+            - S3에 객체가 업로드될 때, 객체의 메타데이터를 DynamoDB 테이블이나 RDS DB의 테이블로 동기화 
+        
+#### CloudFront
+#### CloudWatch Events EventBridge
+#### CloudWatch Logs
+#### Amazon SNS
+- SNS topic 구독
+#### Amazon SQS
+- 배치 크기 
+- 배치 윈도우
+
+#### Cognito
+
+### Lambda@Edge
 
 - Lambda & VPC
     - Lambda 함수는 기본적으로 자체 VPC 외부에서 실행됨(AWS-owned VPC)
@@ -869,8 +1024,6 @@ AWS SDK API 호출 시 재시도전략이 포함되지만,
 직접 AWS API 호출 시 `ThrottlingException` 오류 발생시 = 지수 백오프 
 - 자체 SDK 실행, 자체 사용자 정의 HTTP 호출을 하는 경우, 5xx 서버 에러 발생 시 
 (4xx 클라이언트 오류에서는 실행 x)
-
-
 
 ### 1.3 애플리케이션 개발 시 데이터 스토어를 사용합니다.
 ---
