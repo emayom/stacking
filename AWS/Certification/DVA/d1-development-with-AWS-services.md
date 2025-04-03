@@ -1,5 +1,5 @@
 ---
-last_modified_at: '2025-04-01T06:17:09.848Z'
+last_modified_at: '2025-04-03T06:45:43.462Z'
 date: '2025-03-29T17:29:41.646Z'
 ---
 # AWS Certified Developer - Associate (DVA-C02) 
@@ -18,7 +18,8 @@ date: '2025-03-29T17:29:41.646Z'
 - [1.2 AWS Lambda용 코드를 개발합니다.](#12-aws-lambda용-코드를-개발합니다)
     - [AWS Lambda](#aws-lambda)
     - [Integration with AWS Lambda](#integration-with-aws-lambda)
-    - [Lambda@Edge]()
+    - [Lambda in VPC](#lambda-in-vpc)
+    - [Deploying AWS Lambda functions with CloudFormation](#deploying-aws-lambda-functions-with-cloudformation)
 
 - [1.3 애플리케이션 개발 시 데이터 스토어를 사용합니다.](#13-애플리케이션-개발-시-데이터-스토어를-사용합니다)
     - AWS 기반 스토리지 
@@ -822,7 +823,7 @@ date: '2025-03-29T17:29:41.646Z'
     - 지속 시간(Duration)
         - 월 40만 GB-초 컴퓨팅 시간 무료, 추가 GB-초당 청구 (리전별 비용 상이) 
 
-#### 할당량 (리전별 적용)
+#### 할당량 (리전별 적용) ❗️
 - **메모리 할당**: 128MB ~ 10,240MB (1MB 단위)
     - 구성된 메모리에 비례하여 vCPU가 함수에 할당 (네트워크 품질 및 성능도 향상)
 - **제한 시간**: 기본 3s, 최대 900s(15m) 
@@ -906,6 +907,8 @@ exports.handler = async (event, context) => {
     - 여러 함수가 공유하는 코드 및 데이터를 중앙에서 관리 → 참조를 통해 재사용 
 - 함수당 최대 5개의 Layer 추가 가능 
     - 함수의 소스 코드 + Layers 크기 <= 250MB
+    - <u>Layer 버전은 게시된 후 수정하거나 삭제할 수 없음</u> = Immutable   
+        → 업데이트하려면 새로운 버전을 만들어야 함 
 - 버전 관리 지원
 - 유형 
     - **AWS layers** → AWS에서 공식적으로 제공하는 Layer 
@@ -916,7 +919,7 @@ exports.handler = async (event, context) => {
         - Custom Runtimes이 필요한 경우 (e.g. Rust, C++ 등 공식 지원되지 않는 언어 실행)
         - 종속성(dependencies)을 재사용 가능한 형태로 externalize
     - **Specify an ARN** → 이미 생성되거나 공유된 Layer의 ARN을 직접 입력하여 사용
-
+   
 ### Integration with AWS Lambda 
 #### AWS Lambda 호출 방식(AWS Lambda Invocation Types)
 - **동기식(Synchronous)** = Push Model
@@ -969,62 +972,198 @@ exports.handler = async (event, context) => {
         - Amazon Managed Streaming for Apache Kafka (Amazon MSK)
         - Amazon SQS
 
-#### ALB
+#### ALB + Lambda
 - 동기식 호출 
-- HTTP/HTTPS 환경에서 직접 Lambda 함수 호출 
-    - Lambda 함수를 target group에 등록 필요 
-    - ALB ↔︎ Lambda 함수 호출 → HTTP ↔︎ JSON으로 translate
-    - 다중 헤더(Multi-Header) 값은 배열으로 
+- HTTP(S) 요청을 Lambda로 전달
+    - Lambda 함수를 Target Group으로 등록 필요 
+    - ALB ↔︎ Lambda 함수 간 HTTP ↔︎ JSON 변환(translate)
+    - Multi-Header 지원
+        - 다중 헤더 값은 배열으로 변환 
 
-#### Amazon API Gateway
+#### Amazon API Gateway + Lambda
 - 동기식 호출 
-- REST API 생성, HTTP/HTTPS 환경에서 직접 Lambda 함수 호출 
-- 프록시 통합 (Proxy Integration)
-- 비 프록시 통합 (Non-Proxy Integration)
+- HTTP(S) 요청을 Lambda로 전달
+    - API Gateway의 인증/보안 기능 활용 가능
+    - 통합 방식 
+        - 프록시 통합(Proxy Integration) → API Gateway가 요청을 **원본 그대로** Lambda에 그대로 전달
+        - 비 프록시 통합(Non-Proxy Integration) → API Gateway에서 요청을 **가공(매핑) 후 전달** (매핑 템플릿 필요)
 
-#### Kinesis
+#### Amazon Kinesis + Lambda
 - 이벤트 소스 매핑
-- Lambda를 사용, 실시간으로 데이터 변환을 수행 
+- 실시간 데이터 스트림에서 이벤트 발생 감지(polling) → Lambda 함수 호출  
+    - 실시간 로그 분석 및 데이터 처리
+    - 이벤트 기반 데이터 파이프라인 구축
+    - 실시간 데이터 변환 및 저장 (e.g. Kinesis → Lambda → S3, DynamoDB, Redshift)
 
-#### Amazon DynamoDB
+#### Amazon DynamoDB + Lambda
 - 이벤트 소스 매핑
-- 데이터베이스의 변경
+- DynamoDB Streams 이벤트 발생 감지(polling) → Lambda 함수 실행
+    - 데이터 처리 및 동기화 (e.g. DynamoDB → Lambda → S3, Elasticsearch)
+    - 비즈니스 로직 자동 실행 (e.g. 신규 고객 추가 시 자동 환영 이메일 전송)
 
-#### Amazon S3
+#### Amazon SQS + Lambda
+- 이벤트 소스 매핑
+- SQS 대기열에서 메시지 도착 감지(polling) → Lambda 함수 실행
+
+#### Amazon S3 + Lambda
 - 비동기식 호출 
-- **S3 버킷에서 발생하는 이벤트(S3 Event Notification)** 를 감지하여 이를 Lambda 함수로 전송
-    - <u>버킷 버저닝 활성화 권장</u>
-        - 버전이 지정되지 않은 단일 객체에 동시에 두 개의 쓰기가 수행되는 경우 단일 이벤트 알림만 전송될 수 있다.
-    - 특정 파일 유형이나 이름 패턴에 따라 이벤트를 필터링 가능 (prefix, suffix)
-    - 예시
-        - 파일 업로드 후 자동 리사이징
-        - 실시간 썸네일 생성 
-        - Metadata Sync
-            - S3에 객체가 업로드될 때, 객체의 메타데이터를 DynamoDB 테이블이나 RDS DB의 테이블로 동기화 
+- S3 버킷에서 이벤트 발생 시 (S3 Event Notification) → Lambda 함수로 전송
+    - 이미지 자동 리사이징
+    - 비디오 썸네일 생성 
+    - Metadata Sync
+        - S3에 객체가 업로드될 때, 객체의 메타데이터를 DynamoDB 테이블이나 RDS DB의 테이블로 동기화 
         
-#### CloudFront
-#### CloudWatch Events EventBridge
-#### CloudWatch Logs
-#### Amazon SNS
-- SNS topic 구독
-#### Amazon SQS
-- 배치 크기 
-- 배치 윈도우
+#### Amazon EventBridge + Lambda
+- 비동기식 호출 
 
-#### Cognito
+#### Amazon CloudWatch Logs + Lambda
+- 비동기식 호출 
+- 로그 이벤트 발생 시 → Lambda 함수 실행
 
-### Lambda@Edge
+#### Amazon SNS + Lambda
+- 비동기식 호출 
+- SNS Topic에서 메시지 게시 → 메시지 payload와 함께 Lambda 함수 호출 
 
-- Lambda & VPC
-    - Lambda 함수는 기본적으로 자체 VPC 외부에서 실행됨(AWS-owned VPC)
-        -> 자체 VPC, Private 서브넷의 리소스(RDS, ElasticCache, Internal ELB)에 접근할 수 없음
+#### Amazon Cognito + Lambda
+- 사용자 인증 및 권한 부여 과정 중 **사전에 정의한 특정 시점** → Lambda 함수 실행
+    - Lambda 트리거
+        - 인증 → Pre / Post Authentication
+        - 가입 → Pre Sign-up, Post Confirmation, Migrate User
+        - 메시지 → Custom Message
 
+#### CloudFront + Lambda
+- CloudFront 이벤트
+    - Viewer Request → 사용자의 요청이 수신되었을 때 실행
+    - Viewer Response → 사용자에게 응답을 반환하기 전에 실행
+    - Origin Request → CloudFront가 Origin(e.g. S3, EC2)으로 요청을 전달하는 경우에만 실행
+    - Origin Response → CloudFront가 Origin(e.g. S3, EC2)로부터 응답을 수신한 후 실행 (응답 캐싱)
 
-AWS SDK API 호출 시 재시도전략이 포함되지만,
-직접 AWS API 호출 시 `ThrottlingException` 오류 발생시 = 지수 백오프 
-- 자체 SDK 실행, 자체 사용자 정의 HTTP 호출을 하는 경우, 5xx 서버 에러 발생 시 
-(4xx 클라이언트 오류에서는 실행 x)
+- **CloudFront Functions**
+    - CloudFront의 **네이티브 기능**
+    - 218개 이상의 엣지 로케이션에서 실행
+    - 단순 Request/Response 조작에 최적화
+        - 캐시 키 조작 및 정규화
+        - HTTP 헤더 조작
+        - URL 다시 쓰기 및 리디렉션
+        - 액세스 권한 부여(인가)
+    - 단기 실행 경량 함수, 비용이 저렴하고, 매우 빠르게(µs 단위) 대량 트래픽에 적합
+        - Lambda@Edge 요금의 약 1/6의 비용
 
+- **Lambda@Edge**  
+    ![Image](https://github.com/user-attachments/assets/4384730d-8178-41a1-81e0-bcc0e0c61fbc)
+
+    - **AWS Lambda의 확장된 기능**
+        - Lambda를 통해 CloudFront의 엣지 로케이션에서 코드를 실행할 수 있도록 지원
+    - CloudFront 리전별 엣지 캐시 및 일부 AWS 리전에서 실행
+    - `us-east-1`에서만 작성 가능 
+        - AWS 리전(`us-east-1`)에 작성하면 CloudFront에서 모든 로케이션에 복제 
+    - 복잡한 로직 처리 가능 (AWS 서비스와 연동 가능)
+        - JWT 인증, 이미지 변환 등의 기능 수행 가능
+    - 상대적으로 느림, 실행 시간이 상대적으로 길고 비용이 더 비쌈
+
+- **CloudFront Functions vs Lambda@Edge** ❗️
+    |      | CloudFront Functions | Lambda@Edge |
+    |------|-----------------|--------------|
+    | **프로그래밍 언어** | JavaScript | Node.js, Python |
+    | **실행 속도** | 초당 수백만 개의 요청 (마이크로초(µs) 단위) | 초당 수천개의 요청 (밀리초(ms)) |
+    | **이벤트 소스 (Trigger)** | Viewer Request / Response | Viewer Request / Response <br> Origin Request / Response |
+    | **최대 실행 시간** | < 1ms | Up to 5s (viewer request / response) <br> Up to 30s (origin request / response) |
+    | **최대 메모리** | 2MB | 128MB (viewer request / response) <br> 10,240MB (origin request / response) |
+    | **총 패키지 크기 (라이브러리 포함)**| 10 KB | 50MB |
+    | **Network / File system access** | No | Yes |
+    | **Access to the request body** | No | Yes |
+    | **요금** | Free Tier 지원 <br> 요청당 과금 | Free Tier 미지원 <br> 요청 & 실행 시간(duration)당 과금 |
+
+### Lambda in VPC 
+> [!NOTE]  
+> 모든 Lambda 함수는 Lambda 서비스가 소유하고 관리하는 VPC 내에서 실행된다. 이러한 VPC는 Lambda에 의해 자동으로 유지 관리되며 고객에게는 표시되지 않는다.  
+
+- Lambda 네트워크 모드
+    - VPC mode
+    - no-VPC mode (default)
+
+#### no-VPC mode
+- AWS가 관리하는 VPC(AWS-owned VPC)에서 실행되는 기본 상태 
+    - AWS Public 서비스(e.g. S3, SNS, SQS, Kinesis 등)에 접근 가능 
+        - AWS 내부 네트워크를 통해 접근 
+        - IAM 권한 필요
+    - **인터넷 액세스 가능**
+        - 외부 API와 연동 가능 
+        - 3rd party 데이터베이스 접근 가능 
+    - **자체 VPC 내 Private Subnet의 리소스(e.g. RDS, ElasticCache, Internal ELB)에 접근 불가 ❌**
+        
+#### VPC mode
+- 사용자의 VPC(Customer VPC) 내 Public 또는 Private Subnet에서 실행되는 상태 
+- **인터넷 액세스 불가 ❌**
+    - Private Subnet은 기본적으로 인터넷에 연결되지 않음
+    - 외부 API 요청 불가능 = 외부 서비스와 통신 불가
+    - 단, CloudWatch Logs는 내부 AWS 네트워크를 통해 작동하므로 어떤 상황에서든 작동
+- **자체 VPC 내 Private Subnet의 리소스에 접근 가능** 
+
+#### VPC mode + NAT Gateway / Instance
+> [!NOTE]  
+> NAT Gateway는 Private Subnet에서 온 트래픽을 인터넷으로 전달하는 역할을 담당 
+- 사용자의 VPC(Customer VPC) 내 Private Subnet에서 실행되는 상태 
+- **인터넷 액세스 가능**
+    - Private Subnet → NAT Gateway → Internet Gateway(IGW) → 외부 인터넷 연결
+- **자체 VPC 내 Private Subnet의 리소스에 접근 가능** 
+
+#### VPC mode + VPC Endpoints
+- 사용자의 VPC(Customer VPC) 내 Public 또는 Private Subnet에서 실행되는 상태 
+- **인터넷 액세스 불가하지만, 인터넷 없이 AWS 서비스와 연결 가능** 
+    - AWS PrivateLink 또는 Gateway Endpoint를 통해 접근
+        - Gateway Endpoint → S3, DynamoDB
+        - Interface Endpoint (AWS PrivateLink) → SSM, SNS, SQS, Kinesis 등
+- **자체 VPC 내 Private Subnet의 리소스에 접근 가능** 
+
+#### Lambda 네트워크 모드 비교 
+| | 실행 위치 (Subnet) | 인터넷 액세스 | AWS Public 서비스 접근 | Private Subnet 리소스 접근 |
+|-|------------------|-----------|---------------------|--------------------------|
+| **no-VPC mode**      | AWS-owned VPC | 가능      | 가능 | 불가 |
+| **VPC mode**         | Public 또는 Private Subnet | 불가 | 가능  | 가능 |
+| **VPC mode + NAT**   | Private Subnet | 가능 | 가능 | 가능 |
+| **VPC mode + VPC Endpoints** | Public 또는 Private Subnet | 불가 | 가능 | 가능 |
+
+#### VPC Access 설정 과정 
+1. 사용할 VPC, Subnet 생성, Security Group 정의 
+1. Lambda 함수에서 VPC 설정 추가
+    - 내부적으로 **Elastic Network Interface(ENI)** 를 생성하여 VPC의 서브넷에 연결
+        - ENI를 관리하기 위해 `AWSLambdaVPCAccessExecutionRole` 필요 
+1. 네트워크 설정 (인터넷 액세스 필요 시)
+    - NAT Gateway 생성
+        - Public Subnet에 NAT Gateway 배포
+        - Elastic IP 할당
+    - Route Table 수정
+        - Private Subnet → NAT Gateway로 라우팅 
+
+### Deploying AWS Lambda functions with CloudFormation
+- AWS Lambda 배포 방법 
+    - AWS Management Console 
+    - AWS CLI 
+    - AWS CloudFormation
+    - AWS SAM 
+    - AWS CDK(Cloud Development Kit) 
+
+#### CloudFormation을 사용한 Lambda 함수 배포
+> `AWS::Lambda::Function`
+
+- Lambda 함수와 관련된 모든 AWS 리소스를 코드(YAML/JSON)로 선언적으로 정의하여 배포 
+    - 수동 설정 없이 코드 기반으로 배포
+    - deployment package(`.zip` 파일)와 execution role 필요 
+- Lambda 함수 배포 방식 
+    - **인라인 배포** → 빠르고 간단한 배포
+        - Lambda 함수를 CloudFormation 템플릿 내부에 직접 코드로 포함하는 방식
+            - `Code.ZipFile` 속성을 사용하여 함수 정의 → 내부적으로 deployment package 생성 
+            - 최대 4MB 초과 불가 
+            - **외부 라이브러리(종속성)를 포함시킬 수 없음**
+
+    - **S3 참조 배포**
+        - Lambda 코드를 S3 버킷에 업로드 → CloudFormation 템플릿에서 해당 S3 파일을 참조하는 방식
+            - `S3Bucket`, `S3Key`, `S3ObjectVersion` 속성 사용 
+        - **Multi-Account 배포 가능**
+            - CloudFormation StackSets을 활용하여 여러 AWS 계정에 배포 가능
+            - Cross-Account IAM Role & S3 버킷 정책 설정 필요
+  
 ### 1.3 애플리케이션 개발 시 데이터 스토어를 사용합니다.
 ---
 <details>
